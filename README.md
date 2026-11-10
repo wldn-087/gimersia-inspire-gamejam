@@ -121,3 +121,124 @@ git pull origin main
 git branch -d feat/player-movement
 
 ```
+
+## 1. Aturan Projek & Git Workflow
+
+### A. Aturan Kolaborasi Tim
+
+1. **Dilarang Direct Push ke `main`:** Semua perubahan kode/aset wajib melalui *branch* fitur dan mekanisme *Pull Request* (PR).
+2. **Prinsip "Satu Orang, Satu Scene":** Jangan mengedit file `.tscn` yang sedang dikerjakan anggota tim lain untuk mencegah *merge conflict*.
+3. **Proteksi Base Template:** Dilarang mengedit file di folder `base_templates/` secara langsung. Selalu gunakan fungsi *Inherit Scene* atau *Duplicate*.
+4. **Pull Sebelum Push:** Selalu jalankan `git pull origin main` ke cabang lokal sebelum membuka *Pull Request*.
+
+### B. Format Branching & Commit
+
+* **Format Branch:** `<tipe>/<nama-fitur-singkat>` (contoh: `feat/player-movement`, `fix/ui-pause-glitch`).
+* **Format Commit:** `<tipe>: <deskripsi singkat>`
+
+| Tipe Commit | Kegunaan | Contoh |
+| --- | --- | --- |
+| `feat:` | Fitur atau logika baru | `feat: tambah mekanik phasing hantu` |
+| `fix:` | Perbaikan bug/eror | `fix: perbaiki offset collision player` |
+| `art:` | Aset visual / sprite / tilemap | `art: tambah spritesheet penebang` |
+| `audio:` | Aset suara (BGM/SFX) | `audio: tambah sfx petir dan angin` |
+| `refactor:` | Penataan ulang kode tanpa merubah fungsi | `refactor: pisahkan UI logic dari GameManager` |
+| `docs:` | Pembaharuan dokumentasi | `docs: update readme struktur folder` |
+
+---
+
+## 2. Standar Penamaan Universal (Naming Conventions)
+
+| Elemen Projek | Format | Contoh |
+| --- | --- | --- |
+| **Folder & Berkas File** | `snake_case` | `player_controller.gd`, `main_menu.tscn`, `bgm_forest.ogg` |
+| **Class Name & Custom Node** | `PascalCase` | `class_name PlayerController`, `class_name InteractableBase` |
+| **Node di Scene Tree** | `PascalCase` | `Player`, `CollisionShape2D`, `InteractionArea` |
+| **Variabel & Fungsi** | `snake_case` | `var move_speed: float`, `func take_damage(amount: int):` |
+| **Signal** | `snake_case` | `signal health_changed(new_value)`, `signal item_picked_up` |
+| **Konstanta & Enum** | `UPPER_SNAKE` | `const MAX_SPEED = 300.0`, `enum State { IDLE, MOVE, SCARE }` |
+| **Fungsi/Variabel Private** | `_snake_case` | `var _internal_timer: float`, `func _update_state():` |
+
+---
+
+## 3. Struktur Direktori Projek (General File System)
+
+```text
+res://
+├── assets/                 # Berkas aset mentah dan media
+│   ├── audio/              # SFX (.wav) dan Music (.ogg)
+│   ├── fonts/              # File font (.ttf, .otf)
+│   ├── sprites/            # Textures, Tilemap, SpriteSheets (.png)
+│   └── ui/                 # Frame, icon, & elemen visual antarmuka
+├── scenes/                 # Seluruh komponen visual/node (.tscn)
+│   ├── levels/             # Peta level, arena, & world scene
+│   ├── player/             # Entitas utama pemain & komponennya
+│   ├── enemies/            # Entitas musuh & AI
+│   ├── interactables/      # Objek lingkungan, jebakan, & pancingan
+│   └── ui/                 # Main Menu, HUD Overlay, Pause Popup
+├── scripts/                # Berkas logika & skrip (.gd)
+│   ├── autoload/           # Manager global / Singleton (GameManager.gd)
+│   ├── base/               # Class induk / Interface (CharacterBase.gd)
+│   └── utils/              # Helper, Math, & Constant Loader
+├── base_templates/         # Base template scene untuk di-inherit
+├── docs/                   # GDD, catatan desain, & panduan
+└── project.godot           # File konfigurasi utama engine
+
+```
+
+---
+
+## 4. Struktur Scene & Komponen (Scene Node Architecture)
+
+### A. Prinsip Komponen & Komunikasi Node
+
+**Satu Scene = Satu Komponen / Entitas Spesifik:** Buat scene sekecil dan semenolong mungkin agar gampang di-re-use (*Modular Design*).
+
+### B. Anatomi Standard Scene
+
+#### 1. Entitas Karakter / Player (`CharacterBody2D` / `CharacterBody3D`)
+
+```text
+Player (CharacterBody2D) [Script: PlayerController.gd]
+├── Sprite2D / AnimatedSprite2D     # Visual utama & animasi
+├── CollisionShape2D                # Batas fisika dengan dunia/tembok
+├── Hurtbox (Area2D)                # Area deteksi menerima damage/lampu
+│   └── CollisionShape2D
+├── Hitbox (Area2D)                 # Area deteksi memberi efek/teror
+│   └── CollisionShape2D
+├── InteractionDetector (RayCast2D) # Sensor garis lurus depan karakter
+├── StateMachine (Node)             # Logika status (Idle, Move, Scare)
+│   ├── IdleState (Node)
+│   └── MoveState (Node)
+└── AudioStreamPlayer2D             # Efek suara langkah/aksi karakter
+
+```
+
+#### 2. Objek Interaktif Lingkungan (`Area2D` / `StaticBody2D`)
+
+```text
+InteractableObject (Area2D) [Script: InteractableBase.gd]
+├── Sprite2D                        # Visual objek (misal: Api Unggun / Semak)
+├── CollisionShape2D                # Radius zona interaksi
+├── InteractionPrompt (Control)     # UI melayang (misal: "Tekan E")
+│   └── Label
+└── AudioStreamPlayer2D             # Efek suara objek saat dipicu
+
+```
+
+#### 3. Tampilan Antarmuka / UI (`CanvasLayer`)
+
+```text
+UIOverlay (CanvasLayer) [Script: UIManager.gd]
+└── Control (Full Rect)
+    ├── MarginContainer (HUD Layer)
+    │   └── HBoxContainer
+    │       ├── HealthBar (TextureProgressBar)
+    │       └── ScoreLabel (Label)
+    └── PauseMenu (Control - Hidden)
+        └── PanelContainer
+            └── VBoxContainer
+                ├── ResumeButton (Button)
+                └── QuitButton (Button)
+
+```
