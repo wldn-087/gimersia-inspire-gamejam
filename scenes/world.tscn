@@ -38,4 +38,4 @@ size = Vector3(50, 0.01, 50)
 [node name="Player" parent="." unique_id=393122508 instance=ExtResource("2_rwgxs")]
 
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1808341274]
-transform = Transform3D(1, 0, 0, 0, 0.91463304, 0.40428507, 0, -0.40428507, 0.91463304, 0, 3.1061134, 5.980164)
+transform = Transform3D(1, 0, 0, 0, 0.91463304, 0.40428507, 0, -0.40428507, 0.91463304, 0, 3.4898639, 5.980164)
