@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bhw5sy7xnrhk"]
+
+[ext_resource type="Texture2D" uid="uid://dy46o1lxca8tg" path="res://assets/textures/grass ground texture.jpg" id="1_4xfga"]
+[ext_resource type="PackedScene" uid="uid://blywdtli88853" path="res://assets/model-3d/well.glb" id="2_paxxb"]
+[ext_resource type="PackedScene" uid="uid://pmduuid0e5c5" path="res://assets/model-3d/poss.glb" id="3_gldc4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paxxb"]
+albedo_texture = ExtResource("1_4xfga")
+metallic = 0.05
+roughness = 0.71
+uv1_scale = Vector3(0.02, 0.02, 0.02)
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.1095704
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uj04i"]
+radius = 1.0493164
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
+size = Vector3(3.46, 3.5015528, 3.445)
+
+[node name="Map" type="Node3D" unique_id=1395991664]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=866727356]
+material_override = SubResource("StandardMaterial3D_paxxb")
+use_collision = true
+size = Vector3(50, 0.01, 50)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=559979528]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=76288336]
+shape = SubResource("CylinderShape3D_uj04i")
+
+[node name="well" parent="StaticBody3D" unique_id=1792035274 instance=ExtResource("2_paxxb")]
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="." unique_id=330622833]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2" unique_id=276939868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.515509, 1.7323974, 8.0857525)
+shape = SubResource("BoxShape3D_uj04i")
+
+[node name="poss" parent="StaticBody3D2" unique_id=2122171697 instance=ExtResource("3_gldc4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.515509, 0, 8.0857525)
