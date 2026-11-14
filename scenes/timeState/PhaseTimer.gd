@@ -35,8 +35,10 @@ func start_phase(phase: Phase) -> void:
 # PREP (60 -> 0) => COMBAT (90 -> 0) => kirim signal => PREP lagi
 func _on_timer_timeout() -> void:
 	if current_phase == Phase.PREP:
+		timer_label.add_theme_color_override("font_color",Color.WHITE)
 		start_phase(Phase.COMBAT)
 	else:
+		timer_label.add_theme_color_override("font_color",Color.BLACK)
 		combat_finished.emit()
 		start_phase(Phase.PREP)
 
