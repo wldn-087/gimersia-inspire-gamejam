@@ -99,9 +99,9 @@ git switch -c feat/nama-fitur
 
 Note: Bisa pakai ini untuk membuat branch baru atau berpindah branch:
 
-'''bash
+```bash
 git checkout -b nama/branch
-'''
+```
 
 **3. Kerjakan perubahan**
 
