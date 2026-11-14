@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bhw5sy7xnrhk"]
+
+[ext_resource type="Texture2D" uid="uid://dy46o1lxca8tg" path="res://assets/textures/grass ground texture.jpg" id="1_4xfga"]
+[ext_resource type="PackedScene" uid="uid://brc5inq83axq1" path="res://scenes/backgroud/poss.tscn" id="2_0cso3"]
+[ext_resource type="PackedScene" uid="uid://8jnalv6bc321" path="res://scenes/backgroud/well.tscn" id="3_2klcf"]
+[ext_resource type="PackedScene" uid="uid://obwop6txkuji" path="res://scenes/backgroud/fences.tscn" id="4_2lpho"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paxxb"]
+albedo_texture = ExtResource("1_4xfga")
+metallic = 0.05
+roughness = 0.71
+uv1_scale = Vector3(0.02, 0.02, 0.02)
+uv1_offset = Vector3(0.5, 0, 0.5)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 1.1095704
+
+[node name="Map" type="Node3D" unique_id=1395991664]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=866727356]
+material_override = SubResource("StandardMaterial3D_paxxb")
+use_collision = true
+size = Vector3(50, 0.01, 50)
+
+[node name="Poss" parent="." unique_id=2002501136 instance=ExtResource("2_0cso3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.322643, 4.7683716e-07, 10.935471)
+
+[node name="Well" parent="." unique_id=1150633937 instance=ExtResource("3_2klcf")]
+
+[node name="Fences" parent="." unique_id=1670469893 instance=ExtResource("4_2lpho")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6826608, 0.0050001144, 9.807837)

@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cyu6eksfljaav"]
+
+[ext_resource type="Texture2D" uid="uid://ddn2vd8x3vt8d" path="res://assets/textures/Hay.png" id="1_uuj30"]
+[ext_resource type="Texture2D" uid="uid://c5tft3fyb4vba" path="res://assets/textures/Hay Normal.png" id="2_uuj30"]
+
+[resource]
+resource_name = "Haye"
+cull_mode = 2
+albedo_texture = ExtResource("1_uuj30")
+normal_texture = ExtResource("2_uuj30")
+metadata/_gltf_primary_texture_coord = 0
