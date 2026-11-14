@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://comrpogmhsj6h"]
+
+[ext_resource type="Script" uid="uid://ryy4tp6u5jmy" path="res://scenes/timeState/PhaseTimer.gd" id="1_l34ai"]
+
+[node name="Time" type="Node" unique_id=838476929]
+script = ExtResource("1_l34ai")
+
+[node name="Timer" type="Timer" parent="." unique_id=984963292]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1510208595]
+layer = 100
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=674342860]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
