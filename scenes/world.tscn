@@ -27,7 +27,6 @@ environment = SubResource("Environment_71j4m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1337608601]
 transform = Transform3D(-0.8920127, -0.09156408, 0.44263935, 0.42327762, -0.5127828, 0.74692065, 0.15858674, 0.8536218, 0.49616572, 0, 6.0864086, -0.8943491)
-light_color = Color(1, 0.9686667, 0.53, 1)
 shadow_enabled = true
 
 [node name="Map" parent="." unique_id=1395991664 instance=ExtResource("1_rwgxs")]
@@ -39,8 +38,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79452467, 0, 4.220794)
 transform = Transform3D(1, 0, 0, 0, 0.91463304, 0.40428507, 0, -0.40428507, 0.91463304, 0, 3.4898639, 5.980164)
 
 [node name="Time" parent="." unique_id=838476929 instance=ExtResource("3_4wyf3")]
-prep_duration = 10.0
-combat_duration = 10.0
+prep_duration = 100.0
+combat_duration = 100.0
 
 [node name="AmbienceController" type="Node" parent="." unique_id=319562843 node_paths=PackedStringArray("phase_timer", "sun", "world_env")]
 script = ExtResource("4_k0juu")
