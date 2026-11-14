@@ -25,7 +25,7 @@ environment = SubResource("Environment_71j4m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1337608601]
 transform = Transform3D(-0.8920127, -0.09156408, 0.44263935, 0.42327762, -0.5127828, 0.74692065, 0.15858674, 0.8536218, 0.49616572, 0, 6.0864086, -0.8943491)
-light_color = Color(1, 0.9686667, 0.53, 1)
+light_color = Color(0.078399986, 0.13850662, 0.98, 1)
 shadow_enabled = true
 
 [node name="Map" parent="." unique_id=1395991664 instance=ExtResource("1_rwgxs")]
