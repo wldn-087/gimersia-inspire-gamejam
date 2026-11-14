@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dwpxmxxwqygt5"]
+
+[ext_resource type="Texture2D" uid="uid://bgydygdgxjq02" path="res://assets/textures/Grass.png" id="1_6karp"]
+
+[resource]
+resource_name = "Grass"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_texture = ExtResource("1_6karp")
+roughness = 0.86
