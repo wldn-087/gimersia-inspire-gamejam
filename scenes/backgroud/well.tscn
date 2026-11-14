@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://8jnalv6bc321"]
+
+[ext_resource type="PackedScene" uid="uid://blywdtli88853" path="res://assets/model-3d/well.glb" id="1_kppot"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uj04i"]
+radius = 1.0493164
+
+[node name="Well" type="StaticBody3D" unique_id=2002501136]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1660024336]
+shape = SubResource("CylinderShape3D_uj04i")
+
+[node name="well" parent="." unique_id=1611813164 instance=ExtResource("1_kppot")]

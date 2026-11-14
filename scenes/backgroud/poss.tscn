@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://brc5inq83axq1"]
+
+[ext_resource type="PackedScene" uid="uid://pmduuid0e5c5" path="res://assets/model-3d/poss.glb" id="1_kppot"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
+size = Vector3(3.46, 3.5015528, 3.445)
+
+[node name="Poss" type="StaticBody3D" unique_id=1150633937]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=719564520]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7608209, 0)
+shape = SubResource("BoxShape3D_uj04i")
+
+[node name="poss" parent="." unique_id=1829155894 instance=ExtResource("1_kppot")]
