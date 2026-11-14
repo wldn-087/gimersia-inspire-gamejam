@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://obwop6txkuji" path="res://scenes/backgroud/fences.tscn" id="4_2lpho"]
 [ext_resource type="PackedScene" uid="uid://vkp4vo6yfyo1" path="res://assets/model-3d/bush.glb" id="5_2klcf"]
 [ext_resource type="PackedScene" uid="uid://bfghn25lbplyt" path="res://assets/model-3d/grass.glb" id="6_2lpho"]
+[ext_resource type="PackedScene" uid="uid://c3v57ra52xd1t" path="res://scenes/backgroud/hayebale.tscn" id="7_nakos"]
+[ext_resource type="PackedScene" uid="uid://xtgkeb8euqph" path="res://assets/model-3d/cart.glb" id="8_jh32y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paxxb"]
 albedo_texture = ExtResource("1_4xfga")
@@ -16,6 +18,9 @@ uv1_offset = Vector3(0.5, 0, 0.5)
 uv1_triplanar = true
 uv1_triplanar_sharpness = 1.1095704
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
+size = Vector3(1.42, 1.43, 2.92)
+
 [node name="Map" type="Node3D" unique_id=1395991664]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=866727356]
@@ -24,7 +29,7 @@ use_collision = true
 size = Vector3(50, 0.01, 50)
 
 [node name="Poss" parent="." unique_id=2002501136 instance=ExtResource("2_0cso3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.322643, 4.7683716e-07, 10.935471)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.183139, 4.7683716e-07, 4.9165096)
 
 [node name="Well" parent="." unique_id=1150633937 instance=ExtResource("3_2klcf")]
 
@@ -63,3 +68,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1964846, 0.05589375, 7.826
 
 [node name="Grass7" parent="." unique_id=882168276 instance=ExtResource("6_2lpho")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9624891, 0.05589375, 8.611763)
+
+[node name="Hayebale" parent="." unique_id=544131892 instance=ExtResource("7_nakos")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4961104, 0.46493888, 5.1175804)
+
+[node name="Cart" type="StaticBody3D" parent="." unique_id=20316729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8673177, 0.14663738, 6.600676)
+
+[node name="Cart" parent="Cart" unique_id=1850504376 instance=ExtResource("8_jh32y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0711746)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cart" unique_id=805271084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21490479, -0.5048218)
+shape = SubResource("BoxShape3D_uj04i")

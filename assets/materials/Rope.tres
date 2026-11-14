@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bt1usqewd8j47"]
+
+[resource]
+resource_name = "Rope"
+cull_mode = 2
+albedo_color = Color(0.74370766, 0.2388372, 0.25668746, 1)

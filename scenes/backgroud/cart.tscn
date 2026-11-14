@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ds10ycnylmh7r"]
+
+[ext_resource type="PackedScene" uid="uid://xtgkeb8euqph" path="res://assets/model-3d/cart.glb" id="1_u5vio"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
+size = Vector3(1.42, 1.43, 2.92)
+
+[node name="Cart" type="StaticBody3D" unique_id=1384735816]
+
+[node name="Cart" parent="." unique_id=1612137124 instance=ExtResource("1_u5vio")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0711746)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=631739088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21490479, -0.5048218)
+shape = SubResource("BoxShape3D_uj04i")
