@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cwmj0ae2dp1qt"]
+
+[ext_resource type="PackedScene" uid="uid://cmyu3kqcg5w0s" path="res://assets/model-3d/stone.glb" id="1_eftlo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj04i"]
+radius = 1.3349609
+height = 2.6699219
+
+[node name="Stone" type="StaticBody3D" unique_id=1941675436]
+
+[node name="Stone" parent="." unique_id=517110344 instance=ExtResource("1_eftlo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1465972887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044921875, 0)
+shape = SubResource("CapsuleShape3D_uj04i")

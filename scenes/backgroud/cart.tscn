@@ -3,13 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://xtgkeb8euqph" path="res://assets/model-3d/cart.glb" id="1_u5vio"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
-size = Vector3(1.42, 1.43, 2.92)
+size = Vector3(1.42, 1.0826757, 2.6797266)
 
 [node name="Cart" type="StaticBody3D" unique_id=1384735816]
 
 [node name="Cart" parent="." unique_id=1612137124 instance=ExtResource("1_u5vio")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0711746)
+transform = Transform3D(1.0680274, 0, 0, 0, 1.0680274, 0, 0, 0, 1.0680274, -5.6717836e-05, -0.014382243, 0.7129556)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=631739088]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.21490479, -0.5048218)
+transform = Transform3D(1.0680274, 0, 0, 0, 1.0680274, 0, 0, 0, 1.0680274, 0.0017242173, 0.43721935, 0.06409538)
 shape = SubResource("BoxShape3D_uj04i")
