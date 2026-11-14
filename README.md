@@ -97,6 +97,12 @@ Buat branch sesuai pekerjaan yang akan dilakukan:
 git switch -c feat/nama-fitur
 ```
 
+Note: Bisa pakai ini untuk membuat branch baru atau berpindah branch:
+
+'''bash
+git checkout -b nama/branch
+'''
+
 **3. Kerjakan perubahan**
 
 Lakukan perubahan pada file yang berkaitan dengan tugas. Setelah selesai, periksa perubahan:
