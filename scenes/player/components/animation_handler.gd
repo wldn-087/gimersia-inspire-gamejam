@@ -8,6 +8,7 @@ signal frame_changed(frame: int)
 @export var hand: AnimatedSprite3D
 
 var on_action := false
+var current_action : String
 
 func _ready() -> void:
 	hand.frame_changed.connect(_on_hand_frame_changed)
@@ -18,6 +19,7 @@ func body_anim_play(animation_name: StringName) -> void:
 
 func play_action(action_name: StringName, is_action: bool) -> void:
 	on_action = is_action
+	current_action = action_name
 	hand.play(action_name)
 
 func _on_hand_frame_changed() -> void:
@@ -28,5 +30,6 @@ func _on_hand_animation_finished() -> void:
 		return
 
 	hand.play("idle")
+	current_action = "idle"
 	on_action = false
 	action_finished.emit()

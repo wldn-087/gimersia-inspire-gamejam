@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://kehj4dseauoa" path="res://scenes/player/components/animation_handler.gd" id="4_75vfm"]
 [ext_resource type="Script" uid="uid://bunhtdebhmu65" path="res://scenes/player/components/player_combat.gd" id="8_qek5x"]
 [ext_resource type="Resource" uid="uid://5y5cbunfsg1j" path="res://scenes/player/attack_data/player_melee_attack.tres" id="9_5gtgg"]
+[ext_resource type="PackedScene" uid="uid://dtnsvnnrqw36x" path="res://scenes/player/projectile.tscn" id="10_h17s1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uj04i"]
 
@@ -368,14 +369,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="Animation" id="Animation_qek5x"]
-resource_name = "idle"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gtgg"]
-_data = {
-&"idle": SubResource("Animation_qek5x")
-}
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj04i"]
 radius = 0.33
 
@@ -384,6 +377,9 @@ radius = 1.0
 
 [node name="Player" type="CharacterBody3D" unique_id=393122508]
 script = ExtResource("1_8afob")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1728101950]
+transform = Transform3D(1, 0, 0, 0, 0.83413744, 0.55155665, 0, -0.55155665, 0.83413744, 0, 4.924206, 7.000207)
 
 [node name="Visual" type="Node3D" parent="." unique_id=851428588]
 
@@ -406,9 +402,6 @@ animation = &"range_release"
 autoplay = "idle"
 frame = 5
 frame_progress = 1.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Visual" unique_id=445339612]
-libraries/ = SubResource("AnimationLibrary_5gtgg")
 
 [node name="BodyShape" type="CollisionShape3D" parent="." unique_id=1611510781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -434,6 +427,7 @@ metadata/_custom_type_script = "uid://kehj4dseauoa"
 script = ExtResource("8_qek5x")
 melee_attack = ExtResource("9_5gtgg")
 range_attack = ExtResource("9_5gtgg")
+projectile_scene = ExtResource("10_h17s1")
 metadata/_custom_type_script = "uid://bunhtdebhmu65"
 
 [node name="HitBox" type="Area3D" parent="." unique_id=555497455]
@@ -444,3 +438,6 @@ collision_mask = 2
 [node name="HitBoxShape" type="CollisionShape3D" parent="HitBox" unique_id=715033369]
 shape = SubResource("SphereShape3D_uj04i")
 disabled = true
+
+[node name="ProjectileSpawnPos" type="Marker3D" parent="." unique_id=1375505882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8997581, 0)

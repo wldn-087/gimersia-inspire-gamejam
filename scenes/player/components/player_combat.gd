@@ -11,6 +11,13 @@ var locomotion: PlayerLocomotion
 @export var melee_attack: AttackData
 @export var range_attack: AttackData
 
+@export var projectile_scene: PackedScene
+@export var projectile_speed: float = 10.0
+
+@onready var camera: Camera3D = $"../../Camera3D"
+@onready var projectile_spawn_pos: Marker3D = $"../../ProjectileSpawnPos"
+var charge_time := 0.0
+
 @onready var melee_hitbox: Area3D = $"../../HitBox"
 @onready var melee_shape: CollisionShape3D = $"../../HitBox/HitBoxShape"
 
@@ -37,10 +44,15 @@ func input_check() -> void:
 		start_attack(melee_attack)
 
 	if player_input.range_attack_hold:
-		anim_handler.play_action("range_hold", false)
-
+		charge_time += get_process_delta_time()
+		if anim_handler.current_action != "range_hold":
+			anim_handler.play_action("range_hold", false)
+	
 	if player_input.range_attack_release:
-		start_attack(range_attack)
+		var final_charge := charge_time
+		charge_time = 0.0
+		anim_handler.play_action("range_release", true)
+		spawn_projectile(final_charge)
 
 func update_hitbox_position() -> void:
 	var direction = locomotion.facing_direction
@@ -81,3 +93,27 @@ func _on_action_finished() -> void:
 
 func _on_enemy_detect(enemy: Enemy):
 	enemy.take_damage(melee_attack.damage)
+
+func spawn_projectile(final_charge: float) -> void:
+	var projectile := projectile_scene.instantiate() as Projectile
+	player.get_tree().current_scene.add_child(projectile)
+
+	var mouse_pos := player.get_viewport().get_mouse_position()
+	var ray_origin := camera.project_ray_origin(mouse_pos)
+	var ray_direction := camera.project_ray_normal(mouse_pos)
+
+	var plane := Plane(Vector3.UP, projectile_spawn_pos.global_position.y)
+	var target_pos = plane.intersects_ray(ray_origin, ray_direction)
+
+	if target_pos == null:
+		projectile.queue_free()
+		return
+
+	var direction: Vector3 = (target_pos - projectile_spawn_pos.global_position).normalized()
+
+	projectile.global_position = projectile_spawn_pos.global_position
+	projectile.look_at(projectile.global_position + direction, Vector3.UP)
+
+	projectile.attack_data = range_attack
+	projectile.charge_time = final_charge
+	projectile.linear_velocity = direction * projectile_speed

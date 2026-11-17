@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dtnsvnnrqw36x"]
+
+[ext_resource type="Script" uid="uid://cte2nfdryw71" path="res://scenes/player/attack_data/projectile.gd" id="1_xebok"]
+[ext_resource type="Resource" uid="uid://b1x07ew7k6b0p" path="res://scenes/player/attack_data/player_range_attack.tres" id="2_c28ns"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uj04i"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_uj04i"]
+radius = 0.1
+height = 0.2
+
+[node name="Projectile" type="RigidBody3D" unique_id=1376371092]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_xebok")
+attack_data = ExtResource("2_c28ns")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1589834147]
+shape = SubResource("SphereShape3D_uj04i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1851107039]
+mesh = SubResource("SphereMesh_uj04i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

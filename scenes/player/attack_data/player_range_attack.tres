@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://b1x07ew7k6b0p"]
+
+[ext_resource type="Script" uid="uid://d13gweb1qy83u" path="res://scripts/attack_data.gd" id="1_gd8l6"]
+
+[resource]
+script = ExtResource("1_gd8l6")
+attack_name = &"range_attack"
+animation_name = &"range_attack"
+active_start_frame = 0
+active_end_frame = 0
+recovery_frame = 0
+damage = 2.0
+cooldown = 1.0
+charge_damage = true
+max_damage = 8.0
+metadata/_custom_type_script = "uid://d13gweb1qy83u"

@@ -15,6 +15,9 @@ func is_running():
 
 func attack_input():
 	melee_attack = Input.is_action_just_released("attack_melee")
-	range_attack_hold = Input.is_action_just_pressed("attack_range")
+	if Input.is_action_just_pressed("attack_range"):
+		range_attack_hold = true
+	if Input.is_action_just_released("attack_range"):
+		range_attack_hold = false
 	range_attack_release = Input.is_action_just_released("attack_range")
 	

@@ -36,9 +36,6 @@ shadow_enabled = true
 [node name="Player" parent="." unique_id=393122508 instance=ExtResource("2_rwgxs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79452467, 0, 4.220794)
 
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1808341274]
-transform = Transform3D(1, 0, 0, 0, 0.91463304, 0.40428507, 0, -0.40428507, 0.91463304, 0, 3.4898639, 5.980164)
-
 [node name="Time" parent="." unique_id=838476929 instance=ExtResource("3_4wyf3")]
 
 [node name="AmbienceController" type="Node" parent="." unique_id=385226719 node_paths=PackedStringArray("phase_timer", "sun", "world_env")]
