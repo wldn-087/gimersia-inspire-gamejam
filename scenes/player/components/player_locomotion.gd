@@ -9,6 +9,8 @@ var current_speed = 0.0
 var move_dir : Vector3
 var target_velocity: Vector3
 
+var facing_direction := Vector3.RIGHT
+
 func start(owner: Player):
 	player = owner
 	input_handler = player.player_input
@@ -34,6 +36,7 @@ func move(delta: float):
 	target_velocity = move_dir * current_speed
 	
 	if move_dir != Vector3.ZERO:
+		facing_direction = move_dir
 		current_velocity = current_velocity.move_toward(target_velocity, player.acceleration * delta)
 		anim_player.body_anim_play("walk")
 		if move_dir.x < 0:

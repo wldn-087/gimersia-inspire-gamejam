@@ -79,6 +79,7 @@ func _physics_process(delta: float) -> void:
 # ---------- API publik ----------
 
 func take_damage(amount: float) -> void:
+	print("enemy get attcked")
 	_health.take_damage(amount)
 
 

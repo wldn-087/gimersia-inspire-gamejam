@@ -47,5 +47,5 @@ phase_timer = NodePath("../Time")
 sun = NodePath("../DirectionalLight3D")
 world_env = NodePath("../WorldEnvironment")
 
-[node name="tikus" parent="." unique_id=619417268 instance=ExtResource("5_71j4m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7584627, 0.57520485, 4.086903)
+[node name="Tikus" parent="." unique_id=619417268 instance=ExtResource("5_71j4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8185186, 0.12500012, 7.019368)
