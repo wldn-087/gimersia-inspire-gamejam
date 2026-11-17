@@ -16,10 +16,12 @@ func _on_ready() -> void:
 
 	_area_y = attack_area.position.y
 	max_health = 20.0
-	reset_health()   # dulu: health = max_health (sekarang health read-only)
+	reset_health()
 	move_speed = 4.5
 	damage = 3.0
-	attack_cooldown = 0.8
+	sight_radius = 3.0          # radius lihat tikus
+	lose_sight_delay = 0.5     # opsional
+	attack_cooldown = 2.0
 	attack_hit_delay = 0.25
 	attack_duration = 0.5
 	#print("Area pos: ", attack_area.position, " | Shape pos: ", attack_area.get_child(0).position)

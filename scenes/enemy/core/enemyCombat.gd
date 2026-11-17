@@ -31,7 +31,8 @@ func _start_attack() -> void:
 	await _enemy.get_tree().create_timer(_enemy.attack_hit_delay).timeout
 	if not is_instance_valid(_enemy) or _enemy.is_dead:
 		return
-	if _enemy._is_target_in_range():   # kalau player sempat menghindar, serangan meleset
+	if _enemy._is_target_in_range(): 
+		print("ATTACK")  # kalau player sempat menghindar, serangan meleset
 		_enemy._perform_attack()
 
 	var remaining: float = maxf(_enemy.attack_duration - _enemy.attack_hit_delay, 0.0)

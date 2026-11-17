@@ -20,12 +20,10 @@ func play_anim(anim_name: String) -> void:
 		_sprite.play(anim_name)
 
 
-# Menunggu animasi "die" selesai (kalau ada). Pakai: await visual.play_death()
 func play_death() -> void:
-	if _sprite and _sprite.sprite_frames.has_animation("die"):
-		_sprite.play("die")
+	if _sprite and _sprite.sprite_frames.has_animation("dead"):
+		_sprite.play("dead")
 		await _sprite.animation_finished
-
 
 func face_target(target: Node3D) -> void:
 	if target == null:
