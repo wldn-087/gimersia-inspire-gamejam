@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ccoya4i5axl24" path="res://scripts/ambience_controller.gd" id="4_y5kws"]
 [ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="5_0wgkg"]
 [ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="6_yntwj"]
+[ext_resource type="PackedScene" uid="uid://b2p8315iwxcow" path="res://scenes/lahan.tscn" id="7_8sg25"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_top_color = Color(0.31124508, 0.6307091, 0.7595706, 1)
@@ -33,6 +34,7 @@ light_color = Color(1, 0.9686667, 0.53, 1)
 shadow_enabled = true
 
 [node name="Map" parent="." unique_id=1395991664 instance=ExtResource("1_lqthg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025561213, 0)
 
 [node name="Player" parent="." unique_id=393122508 instance=ExtResource("2_yntwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79452467, 0, 4.220794)
@@ -53,3 +55,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7584627, 0.57520485, 4.086
 
 [node name="ulat" parent="." unique_id=2031096532 instance=ExtResource("6_yntwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.178921, 0, 0)
+
+[node name="Lahan" parent="." unique_id=1746492850 instance=ExtResource("7_8sg25")]

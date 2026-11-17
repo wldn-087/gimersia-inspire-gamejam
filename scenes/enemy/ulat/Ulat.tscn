@@ -238,6 +238,7 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_7r4gi"]
 
 [node name="Player" type="CharacterBody3D" unique_id=619417268]
+collision_layer = 2
 script = ExtResource("5_iufxt")
 metadata/_custom_type_script = "uid://dbbdfahsf6cqv"
 
