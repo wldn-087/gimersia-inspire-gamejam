@@ -1,25 +1,83 @@
-extends Node
+
+extends CombatSystem
 class_name PlayerCombat
 
 var player: Player
 var anim_handler: AnimationHandler
 var player_input: PlayerInput
+var locomotion: PlayerLocomotion
 
-var is_attacking: bool
+@export_group("Attacks")
+@export var melee_attack: AttackData
+@export var range_attack: AttackData
 
-func start(owner: Player):
+@onready var melee_hitbox: Area3D = $"../../HitBox"
+@onready var melee_shape: CollisionShape3D = $"../../HitBox/HitBoxShape"
+
+var hitbox_active := false
+
+func start(owner: Player) -> void:
 	player = owner
 	anim_handler = player.anim_player
 	player_input = player.player_input
-	
-func input_check():
-	if is_attacking: return
+	locomotion = player.player_locomotion
+
+	melee_hitbox.monitoring = true
+	deactivate_hitbox()
+
+	anim_handler.frame_changed.connect(_on_attack_frame_changed)
+	anim_handler.action_finished.connect(_on_action_finished)
+	melee_hitbox.body_entered.connect(_on_enemy_detect)
+
+func input_check() -> void:
+	if is_attacking:
+		return
+
 	if player_input.melee_attack:
-		print("Player is melee attack")
-		anim_handler.play_action("melee_attack", true)
+		start_attack(melee_attack)
+
 	if player_input.range_attack_hold:
-		print("Player is hold range attack")
 		anim_handler.play_action("range_hold", false)
+
 	if player_input.range_attack_release:
-		print("Player is release range attack")
-		anim_handler.play_action("range_release", true)
+		start_attack(range_attack)
+
+func update_hitbox_position() -> void:
+	var direction = locomotion.facing_direction
+	melee_hitbox.position = direction * 0.8
+
+func play_attack_animation(animation_name: StringName) -> void:
+	anim_handler.play_action(animation_name, true)
+
+func _on_attack_frame_changed(frame: int) -> void:
+	if not is_attacking or current_attack == null:
+		return
+
+	if anim_handler.hand.animation != current_attack.animation_name:
+		return
+
+	var should_be_active := (
+		frame >= current_attack.active_start_frame
+		and frame <= current_attack.active_end_frame
+	)
+
+	if should_be_active and not hitbox_active:
+		activate_hitbox()
+
+	elif not should_be_active and hitbox_active:
+		deactivate_hitbox()
+
+func activate_hitbox() -> void:
+	melee_shape.set_deferred("disabled", false)
+	hitbox_active = true
+
+func deactivate_hitbox() -> void:
+	melee_shape.set_deferred("disabled", true)
+	hitbox_active = false
+
+func _on_action_finished() -> void:
+	deactivate_hitbox()
+	finish_attack()
+
+func _on_enemy_detect(enemy: Enemy):
+	enemy.take_damage(melee_attack.damage)

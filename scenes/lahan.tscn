@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b2p8315iwxcow"]
+
+[ext_resource type="Script" uid="uid://bhnbe57ppoh5y" path="res://lahan.gd" id="1_28i0b"]
+[ext_resource type="Script" uid="uid://dxbgm3kuoruf" path="res://health_component.gd" id="2_ddlwm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5x88x"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_p6dlj"]
+
+[node name="Lahan" type="Area3D" unique_id=1746492850]
+script = ExtResource("1_28i0b")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1383019805]
+script = ExtResource("2_ddlwm")
+metadata/_custom_type_script = "uid://dxbgm3kuoruf"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1188122768]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044921875, 0)
+shape = SubResource("BoxShape3D_5x88x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=875499691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.044921875, 0)
+mesh = SubResource("BoxMesh_p6dlj")
