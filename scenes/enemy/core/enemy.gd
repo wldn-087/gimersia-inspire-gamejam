@@ -10,6 +10,11 @@ signal died(enemy: Enemy)
 @export var move_speed: float = 3.0
 @export var stop_distance: float = 1.0
 
+@export_group("Vision")
+@export var sight_radius: float = 8.0         # radius pengelihatan musuh
+@export var lose_sight_delay: float = 0.75    # jeda sebelum menyerah setelah player keluar vision
+@export var aggro_on_player: bool = true      # false = abaikan player (khusus lahan)
+
 @export_group("Attack")
 @export var damage: float = 10.0
 @export var attack_range: float = 1.5        # dipakai deteksi default (jarak angka)
@@ -25,6 +30,8 @@ var _health: EnemyHealth
 var _visual: EnemyVisual
 var _movement: EnemyMovement
 var _combat: EnemyCombat
+
+var _targeting: EnemyTargeting
 
 # Properti read-only supaya kode lama (player, UI, dll) tetap bisa baca ini.
 var health: float:
@@ -47,6 +54,9 @@ func _ready() -> void:
 	_combat = EnemyCombat.new(self)
 
 	target = _find_player(get_tree().current_scene)
+
+	_targeting = EnemyTargeting.new(self)
+
 	_on_ready()
 
 
@@ -56,6 +66,7 @@ func _physics_process(delta: float) -> void:
 
 	if target == null:
 		target = _find_player(get_tree().current_scene)
+	_targeting.update(delta)
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
