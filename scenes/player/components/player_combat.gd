@@ -9,7 +9,6 @@ var locomotion: PlayerLocomotion
 
 @export_group("Attacks")
 @export var melee_attack: AttackData
-@export var range_attack: AttackData
 
 @onready var melee_hitbox: Area3D = $"../../HitBox"
 @onready var melee_shape: CollisionShape3D = $"../../HitBox/HitBoxShape"
@@ -33,14 +32,8 @@ func input_check() -> void:
 	if is_attacking:
 		return
 
-	if player_input.melee_attack:
+	if player_input.attack_input():
 		start_attack(melee_attack)
-
-	if player_input.range_attack_hold:
-		anim_handler.play_action("range_hold", false)
-
-	if player_input.range_attack_release:
-		start_attack(range_attack)
 
 func update_hitbox_position() -> void:
 	var direction = locomotion.facing_direction
