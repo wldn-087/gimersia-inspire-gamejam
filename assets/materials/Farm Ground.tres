@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ddsa36cbgje5i"]
+
+[ext_resource type="Texture2D" uid="uid://o8me05gmp78k" path="res://assets/textures/Farm Ground.png" id="1_fox15"]
+[ext_resource type="Texture2D" uid="uid://cnbb8gxr613pb" path="res://assets/textures/Farm Ground Normal.png" id="2_bkbex"]
+
+[resource]
+resource_name = "Farm Ground"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+albedo_texture = ExtResource("1_fox15")
+normal_enabled = true
+normal_scale = 2.0
+normal_texture = ExtResource("2_bkbex")

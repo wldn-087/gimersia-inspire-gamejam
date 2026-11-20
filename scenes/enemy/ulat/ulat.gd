@@ -17,7 +17,6 @@ func _on_ready() -> void:
 	_area_y = attack_area.position.y
 	max_health = 20.0
 	reset_health()
-	move_speed = 100
 	damage = 1.0
 	sight_radius = 3.0          # radius lihat tikus
 	lose_sight_delay = 0.5     # opsional
