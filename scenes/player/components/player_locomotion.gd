@@ -38,7 +38,7 @@ func move(delta: float):
 	if move_dir != Vector3.ZERO:
 		facing_direction = move_dir
 		current_velocity = current_velocity.move_toward(target_velocity, player.acceleration * delta)
-		anim_player.body_anim_play("walk")
+		anim_player.body_anim_play("walk" if !input_handler.is_running() else "run")
 		if move_dir.x < 0:
 			anim_player.body.flip_h = true
 		if move_dir.x > 0:
