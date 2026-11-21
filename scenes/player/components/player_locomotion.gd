@@ -24,6 +24,11 @@ func gravity(delta: float):
 
 func move(delta: float):
 	gravity(delta)
+	if(anim_player.on_action):
+		player.velocity.x = 0
+		player.velocity.z = 0
+		return
+		
 	var move_input = input_handler.movement_input
 	move_dir = Vector3(move_input.x, 0, move_input.y).normalized()
 	var current_velocity := player.velocity

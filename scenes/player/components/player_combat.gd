@@ -40,13 +40,13 @@ func update_hitbox_position() -> void:
 	melee_hitbox.position = direction * 0.8
 
 func play_attack_animation(animation_name: StringName) -> void:
-	anim_handler.play_action(animation_name, true)
+	anim_handler.body_anim_play("attack", true)
 
 func _on_attack_frame_changed(frame: int) -> void:
 	if not is_attacking or current_attack == null:
 		return
 
-	if anim_handler.hand.animation != current_attack.animation_name:
+	if anim_handler.body.animation != current_attack.animation_name:
 		return
 
 	var should_be_active := (

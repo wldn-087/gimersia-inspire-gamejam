@@ -4,9 +4,8 @@
 
 [resource]
 script = ExtResource("1_kawvq")
-attack_name = &"melee_attack"
-animation_name = &"melee_attack"
-active_start_frame = 3
-active_end_frame = 4
-recovery_frame = 4
+attack_name = &"attack"
+animation_name = &"attack"
+active_end_frame = 5
+recovery_frame = 6
 metadata/_custom_type_script = "uid://d13gweb1qy83u"
