@@ -19,5 +19,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	player_locomotion.move(delta)
 	player_combat.input_check()
+	player_combat.update_hitbox_position()
 	move_and_slide()
 	

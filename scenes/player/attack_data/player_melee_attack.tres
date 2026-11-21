@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://5y5cbunfsg1j"]
+
+[ext_resource type="Script" uid="uid://d13gweb1qy83u" path="res://scripts/attack_data.gd" id="1_kawvq"]
+
+[resource]
+script = ExtResource("1_kawvq")
+attack_name = &"attack"
+animation_name = &"attack"
+active_end_frame = 5
+recovery_frame = 6
+metadata/_custom_type_script = "uid://d13gweb1qy83u"

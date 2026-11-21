@@ -1,19 +1,29 @@
 extends Node
 class_name AnimationHandler
 
-@export var body : AnimatedSprite3D
-@export var hand: AnimatedSprite3D
+signal action_finished
+signal frame_changed(frame: int)
+
+@export var body: AnimatedSprite3D
 
 var on_action := false
 
-func body_anim_play(animation_name : String):
+func _ready() -> void:
+	body.frame_changed.connect(_on_frame_changed)
+	body.animation_finished.connect(_on_animation_finished)
+
+func body_anim_play(animation_name: StringName, is_action = false) -> void:
+	on_action = is_action
 	body.play(animation_name)
 
-func play_action(action_name: String, is_action: bool):
-	hand.play(action_name)
-	on_action = is_action
+func _on_frame_changed() -> void:
+	frame_changed.emit(body.frame)
 
-func _on_should_be_hand_animation_finished() -> void:
-	if !on_action: return
-	hand.play("idle")
+
+func _on_animation_finished() -> void:
+	if not on_action:
+		return
+
+	body.play("idle")
 	on_action = false
+	action_finished.emit()

@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Gimersia Inspire GameJam"
-run/main_scene="uid://bkwnfwaktg6n0"
+run/main_scene="uid://b6pkl5uti2shb"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_height"
 
 [dotnet]
 
@@ -65,8 +65,9 @@ attack_range={
 [layer_names]
 
 3d_physics/layer_1="Solid"
-3d_physics/layer_2="Player"
+3d_physics/layer_2="Entity"
 3d_physics/layer_3="Interactable"
+3d_physics/layer_4="Hitbox"
 
 [physics]
 

@@ -9,6 +9,8 @@ var current_speed = 0.0
 var move_dir : Vector3
 var target_velocity: Vector3
 
+var facing_direction := Vector3.RIGHT
+
 func start(owner: Player):
 	player = owner
 	input_handler = player.player_input
@@ -22,6 +24,11 @@ func gravity(delta: float):
 
 func move(delta: float):
 	gravity(delta)
+	if(anim_player.on_action):
+		player.velocity.x = 0
+		player.velocity.z = 0
+		return
+		
 	var move_input = input_handler.movement_input
 	move_dir = Vector3(move_input.x, 0, move_input.y).normalized()
 	var current_velocity := player.velocity
@@ -34,8 +41,9 @@ func move(delta: float):
 	target_velocity = move_dir * current_speed
 	
 	if move_dir != Vector3.ZERO:
+		facing_direction = move_dir
 		current_velocity = current_velocity.move_toward(target_velocity, player.acceleration * delta)
-		anim_player.body_anim_play("walk")
+		anim_player.body_anim_play("walk" if !input_handler.is_running() else "run")
 		if move_dir.x < 0:
 			anim_player.body.flip_h = true
 		if move_dir.x > 0:

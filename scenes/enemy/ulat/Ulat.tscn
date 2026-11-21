@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://ldq2h2pvq1tv"]
+
+[ext_resource type="Texture2D" uid="uid://cguytv1tmhlw0" path="res://assets/sprites/ulat/Preview.png" id="2_2pk7l"]
+[ext_resource type="Script" uid="uid://bu4pcuh200tcq" path="res://scenes/enemy/ulat/ulat.gd" id="5_iufxt"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71j4m"]
+radius = 0.25
+height = 1.3
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gxfs2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2pk7l")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2pk7l")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2pk7l")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7r4gi"]
+
+[node name="Ulat" type="CharacterBody3D" unique_id=619417268]
+collision_layer = 2
+script = ExtResource("5_iufxt")
+metadata/_custom_type_script = "uid://dbbdfahsf6cqv"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=269903998]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.20353886, 0)
+shape = SubResource("CapsuleShape3D_71j4m")
+
+[node name="Visual" type="Node3D" parent="." unique_id=382881381]
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visual" unique_id=1298061559]
+transform = Transform3D(0.25506106, 0, 0, 0, 0.25506106, 0, 0, 0, 0.25506106, 0, 0.5690569, 0)
+sprite_frames = SubResource("SpriteFrames_gxfs2")
+animation = &"attack"
+
+[node name="AreaAttack" type="Area3D" parent="." unique_id=2078186207]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaAttack" unique_id=634506043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24362153, 0.9601308, 0.14179325)
+shape = SubResource("BoxShape3D_7r4gi")
