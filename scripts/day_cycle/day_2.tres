@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DayConfig" format=3 uid="uid://b8rtr0xjallh8"]
+
+[ext_resource type="Script" uid="uid://bfj3mdi83auu4" path="res://scripts/day_cycle/day_config.gd" id="1_xrspd"]
+
+[resource]
+script = ExtResource("1_xrspd")
+day_type = 1
+metadata/_custom_type_script = "uid://bfj3mdi83auu4"

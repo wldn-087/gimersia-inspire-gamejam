@@ -43,9 +43,16 @@ transform = Transform3D(1, 0, 0, 0, 0.91463304, 0.40428507, 0, -0.40428507, 0.91
 
 [node name="AmbienceController" type="Node" parent="." unique_id=385226719 node_paths=PackedStringArray("phase_timer", "sun", "world_env")]
 script = ExtResource("4_k0juu")
-phase_timer = NodePath("../Time")
-sun = NodePath("../DirectionalLight3D")
-world_env = NodePath("../WorldEnvironment")
+phase_timer = NodePath("")
+sun = NodePath("")
+world_env = NodePath("")
+prep_light_color = Color(0.9529412, 0.92156863, 0.827451, 1)
+combat_light_energy = 0.6
+combat_light_color = Color(0.6023982, 0.71123236, 1, 1)
+combat_sky_top_color = Color(0.15899453, 0.23190483, 0.7067165, 1)
+combat_sky_horizon_color = Color(0.16078432, 0.23137255, 0.7058824, 1)
+combat_ground_color = Color(0.057800006, 0.086020045, 0.34, 1)
+transition_duration = 3.0
 
 [node name="Tikus" parent="." unique_id=619417268 instance=ExtResource("5_71j4m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8185186, 0.12500012, 7.019368)
