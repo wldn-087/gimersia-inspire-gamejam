@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bdnmocod025j6" path="res://scripts/day_cycle/day_cycle_manager.gd" id="7_whedg"]
 [ext_resource type="Resource" uid="uid://b8rtr0xjallh8" path="res://scripts/day_cycle/day_2.tres" id="8_uni85"]
 [ext_resource type="Script" uid="uid://c4s2g14fudycw" path="res://scripts/spawnSystem/enemySpawn.gd" id="9_0wgkg"]
+[ext_resource type="PackedScene" uid="uid://brc5inq83axq1" path="res://scenes/poss.tscn" id="9_whedg"]
 [ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="10_f8xhy"]
 [ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="11_5iq37"]
 
@@ -104,3 +105,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.061127, -1.9073486e-06, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.067047, 0, 22.34701)
 
 [node name="Enemies" type="Node" parent="." unique_id=637664481]
+
+[node name="Poss" parent="." unique_id=300202430 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("9_whedg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.76583, 1.4305115e-06, 19.218952)
+day_cycle_manager = NodePath("../DayCycleManager")

@@ -1,3 +1,4 @@
+
 extends Interactable
 class_name RestSpot
 

@@ -11,6 +11,7 @@ size = Vector3(3.46, 3.5015528, 3.445)
 
 [node name="Area3D" type="Area3D" unique_id=300202430]
 script = ExtResource("1_jsis6")
+prompt_text = "Rest"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=303872454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5082397, 0)

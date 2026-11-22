@@ -328,7 +328,7 @@ radius = 0.33
 [sub_resource type="SphereShape3D" id="SphereShape3D_uj04i"]
 radius = 0.82131255
 
-[node name="Player" type="CharacterBody3D" unique_id=393122508]
+[node name="Player" type="CharacterBody3D" unique_id=393122508 groups=["player"]]
 script = ExtResource("1_8afob")
 
 [node name="Visual" type="Node3D" parent="." unique_id=851428588]
