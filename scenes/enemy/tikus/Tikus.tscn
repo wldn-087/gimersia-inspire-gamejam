@@ -1,23 +1,101 @@
 [gd_scene format=3 uid="uid://dsin0dx1cxi50"]
 
 [ext_resource type="Script" uid="uid://ftnttkr3kj5p" path="res://scenes/enemy/tikus/tikus.gd" id="1_8xodt"]
-[ext_resource type="Texture2D" uid="uid://c0ps5053yqcwq" path="res://assets/sprites/tikus/Preview.png" id="2_gxfs2"]
+[ext_resource type="Texture2D" uid="uid://chsc428ctd3tk" path="res://assets/sprites/Tikus_Attack/0002.png0001.png" id="2_jt4qt"]
+[ext_resource type="Texture2D" uid="uid://33ndx4b782lf" path="res://assets/sprites/Tikus_Attack/0002.png0002.png" id="3_yt746"]
+[ext_resource type="Texture2D" uid="uid://cwsdrhhgchs27" path="res://assets/sprites/Tikus_Attack/0002.png0003.png" id="4_5al1l"]
+[ext_resource type="Texture2D" uid="uid://dwdtl01erka3d" path="res://assets/sprites/Tikus_Attack/0002.png0004.png" id="5_vdpbw"]
+[ext_resource type="Texture2D" uid="uid://x6h877sn42ia" path="res://assets/sprites/Tikus_Attack/0002.png0005.png" id="6_2sjua"]
+[ext_resource type="Texture2D" uid="uid://n1sd6fxuyf4n" path="res://assets/sprites/Tikus_Attack/0002.png0008.png" id="7_mpuwo"]
+[ext_resource type="Texture2D" uid="uid://d1353wkqv1jfx" path="res://assets/sprites/Tikus_Attack/0002.png0009.png" id="8_dfcda"]
+[ext_resource type="Texture2D" uid="uid://su6m03qjfdr" path="res://assets/sprites/Tikus_Attack/0002.png0006.png" id="9_ytpax"]
+[ext_resource type="Texture2D" uid="uid://dakd2n0w4iq21" path="res://assets/sprites/Tikus_Attack/0002.png0007.png" id="10_ykyqo"]
+[ext_resource type="Texture2D" uid="uid://xkunuh33e1iq" path="res://assets/sprites/Tikus_Attack/0002.png0010.png" id="11_8mkgx"]
+[ext_resource type="Texture2D" uid="uid://cejnnnpsaye8t" path="res://assets/sprites/Tikus_Attack/0002.png0011.png" id="12_1donx"]
+[ext_resource type="Texture2D" uid="uid://c2gpqqmc8kmq2" path="res://assets/sprites/Tikus_Attack/0002.png0012.png" id="13_rfsmx"]
+[ext_resource type="Texture2D" uid="uid://buee0noqo6e45" path="res://assets/sprites/Tikus_Attack/0002.png0013.png" id="14_n1v2x"]
+[ext_resource type="Texture2D" uid="uid://3wykkwh7omkg" path="res://assets/sprites/Tikus_Attack/0002.png0014.png" id="15_wyvh8"]
+[ext_resource type="Texture2D" uid="uid://d03hux33gwtcs" path="res://assets/sprites/Tikus_Attack/0002.png0015.png" id="16_lhps4"]
+[ext_resource type="Texture2D" uid="uid://bpq2bb3f6mgmq" path="res://assets/sprites/Tikus_Attack/0002.png0016.png" id="17_3mikg"]
+[ext_resource type="Texture2D" uid="uid://c57rrfvjm7okr" path="res://assets/sprites/Tikus_Walk/0002.png0001.png" id="18_85toi"]
+[ext_resource type="Texture2D" uid="uid://dy84byrkvaffg" path="res://assets/sprites/Tikus_Walk/0002.png0002.png" id="19_ejskt"]
+[ext_resource type="Texture2D" uid="uid://k3pme2xp3s8p" path="res://assets/sprites/Tikus_Walk/0002.png0003.png" id="20_nv0a1"]
+[ext_resource type="Texture2D" uid="uid://prgmckvnto8n" path="res://assets/sprites/Tikus_Walk/0002.png0004.png" id="21_bwpkh"]
+[ext_resource type="Texture2D" uid="uid://ccqdvkngjmf0i" path="res://assets/sprites/Tikus_Walk/0002.png0005.png" id="22_h6okc"]
+[ext_resource type="Texture2D" uid="uid://bf155q4hjt4dk" path="res://assets/sprites/Tikus_Walk/0002.png0006.png" id="23_4xh44"]
+[ext_resource type="Texture2D" uid="uid://c1yn0rcd2sbr" path="res://assets/sprites/Tikus_Walk/0002.png0007.png" id="24_g48wd"]
+[ext_resource type="Texture2D" uid="uid://4qbm6tspgvge" path="res://assets/sprites/Tikus_Walk/0002.png0008.png" id="25_sonmo"]
+[ext_resource type="Texture2D" uid="uid://pcuvdh553fkx" path="res://assets/sprites/Tikus_Walk/0002.png0009.png" id="26_3syd6"]
+[ext_resource type="Texture2D" uid="uid://dmmnx062a55ij" path="res://assets/sprites/Tikus_Walk/0002.png0010.png" id="27_x46l6"]
+[ext_resource type="Texture2D" uid="uid://cekdsnyu8p68y" path="res://assets/sprites/Tikus_Walk/0002.png0011.png" id="28_x8m46"]
+[ext_resource type="Texture2D" uid="uid://b86ddubbge16w" path="res://assets/sprites/Tikus_Walk/0002.png0012.png" id="29_gc2tf"]
+[ext_resource type="Texture2D" uid="uid://ubwvkn11hmpq" path="res://assets/sprites/Tikus_Walk/0002.png0013.png" id="30_7kfwa"]
+[ext_resource type="Texture2D" uid="uid://2mgnkutunylq" path="res://assets/sprites/Tikus_Walk/0002.png0014.png" id="31_l6m3e"]
+[ext_resource type="Texture2D" uid="uid://donoq3xvdnu6q" path="res://assets/sprites/Tikus_Walk/0002.png0015.png" id="32_usu2d"]
+[ext_resource type="Texture2D" uid="uid://cce0f4p8b6x4p" path="res://assets/sprites/Tikus_Walk/0002.png0016.png" id="33_akv4m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71j4m"]
+radius = 0.35002345
+height = 1.1042387
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gxfs2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_gxfs2")
+"texture": ExtResource("2_jt4qt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yt746")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5al1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vdpbw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2sjua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mpuwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dfcda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ytpax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ykyqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8mkgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1donx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_rfsmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_n1v2x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wyvh8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_lhps4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_3mikg")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"attack",
 "speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_gxfs2")
+"texture": ExtResource("18_85toi")
 }],
 "loop": 1,
 "name": &"idle",
@@ -25,7 +103,52 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_gxfs2")
+"texture": ExtResource("18_85toi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ejskt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_nv0a1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_bwpkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_h6okc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_4xh44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_g48wd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_sonmo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_3syd6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_x46l6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_x8m46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_gc2tf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_7kfwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_l6m3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_usu2d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_akv4m")
 }],
 "loop": 1,
 "name": &"walk",
@@ -40,15 +163,17 @@ script = ExtResource("1_8xodt")
 metadata/_custom_type_script = "uid://dbbdfahsf6cqv"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=269903998]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.04723656, 0.347, 0)
 shape = SubResource("CapsuleShape3D_71j4m")
 
 [node name="Visual" type="Node3D" parent="." unique_id=382881381]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visual" unique_id=1298061559]
-transform = Transform3D(0.18354355, 0, 0, 0, 0.18354355, 0, 0, 0, 0.18354355, 0, 0.39180952, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5094267, 0)
+shaded = true
+double_sided = false
 sprite_frames = SubResource("SpriteFrames_gxfs2")
-animation = &"walk"
+animation = &"attack"
 
 [node name="AreaAttack" type="Area3D" parent="." unique_id=2078186207]
 collision_layer = 8

@@ -7,5 +7,4 @@ script = ExtResource("1_oyeoo")
 day_number = 1
 preparation_duration = 0.0
 combat_min_duration = 10.0
-worm_spawn_weight = 0.0
 metadata/_custom_type_script = "uid://bfj3mdi83auu4"
