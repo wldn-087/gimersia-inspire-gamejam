@@ -7,7 +7,8 @@ signal phase_finished(phase: Phase)
 
 enum Phase {
 	PREP,
-	COMBAT
+	COMBAT,
+	RESTING
 }
 
 var current_phase: Phase = Phase.PREP
@@ -43,10 +44,18 @@ func start_phase(phase: Phase, duration: float = -1.0) -> void:
 
 	timer.start(phase_duration)
 
-	var phase_name := "PREP" if phase == Phase.PREP else "COMBAT"
+	var phase_name := _get_phase_name(phase)
 	phase_changed.emit(phase_name)
 
 	_update_label(phase_duration)
+
+
+func set_phase(phase: Phase) -> void:
+	current_phase = phase
+	timer.stop()
+
+	phase_changed.emit(_get_phase_name(phase))
+	_update_label(0.0)
 
 
 func stop_timer() -> void:
@@ -54,8 +63,16 @@ func stop_timer() -> void:
 	_update_label(0.0)
 
 
-func set_visual_phase(phase_name: String) -> void:
-	phase_changed.emit(phase_name)
+func _get_phase_name(phase: Phase) -> String:
+	match phase:
+		Phase.PREP:
+			return "PREP"
+		Phase.COMBAT:
+			return "COMBAT"
+		Phase.RESTING:
+			return "RESTING"
+
+	return "UNKNOWN"
 
 
 func _on_timer_timeout() -> void:

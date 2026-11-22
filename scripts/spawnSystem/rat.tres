@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="SpawnEntry" format=3 uid="uid://c13vvv2c2loxu"]
 
 [ext_resource type="Script" uid="uid://17f2e2b7vw34" path="res://scripts/spawnSystem/spawnEntry.gd" id="1_nk5e1"]
-[ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="1_yynal"]
+[ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="1_yynal"]
 
 [resource]
 script = ExtResource("1_nk5e1")
 scene = ExtResource("1_yynal")
-enemy_type = 0
+enemy_type = 1
 metadata/_custom_type_script = "uid://17f2e2b7vw34"
