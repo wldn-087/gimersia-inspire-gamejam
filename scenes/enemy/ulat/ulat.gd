@@ -41,7 +41,3 @@ func _update_attack_area() -> void:
 
 func _is_target_in_range() -> bool:
 	return target != null and attack_area.get_overlapping_bodies().has(target)
-
-func _perform_attack() -> void:
-	if target and target.has_method("take_damage"):
-		target.take_damage(damage)
