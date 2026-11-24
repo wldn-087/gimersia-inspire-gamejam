@@ -36,8 +36,7 @@ func input_check() -> void:
 		start_attack(melee_attack)
 
 func update_hitbox_position() -> void:
-	var direction = locomotion.facing_direction
-	melee_hitbox.position = direction * 0.8
+	melee_hitbox.position.x = -0.695 if anim_handler.body.flip_h else 0.695
 
 func play_attack_animation(animation_name: StringName) -> void:
 	anim_handler.body_anim_play("attack", true)
