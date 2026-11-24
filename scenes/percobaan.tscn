@@ -4,8 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dr831lsjk88ta" path="res://scenes/player/player.tscn" id="2_yntwj"]
 [ext_resource type="PackedScene" uid="uid://comrpogmhsj6h" path="res://scenes/timeState/Time.tscn" id="3_8sg25"]
 [ext_resource type="Script" uid="uid://ccoya4i5axl24" path="res://scripts/ambience_controller.gd" id="4_y5kws"]
-[ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="5_0wgkg"]
-[ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="6_yntwj"]
+[ext_resource type="Script" uid="uid://bfj3mdi83auu4" path="res://scripts/day_cycle/day_config.gd" id="6_5iq37"]
+[ext_resource type="Resource" uid="uid://b0n1uj67r8s8u" path="res://scripts/day_cycle/day_1.tres" id="7_f5xy7"]
+[ext_resource type="Script" uid="uid://bdnmocod025j6" path="res://scripts/day_cycle/day_cycle_manager.gd" id="7_whedg"]
+[ext_resource type="Resource" uid="uid://b8rtr0xjallh8" path="res://scripts/day_cycle/day_2.tres" id="8_uni85"]
+[ext_resource type="Script" uid="uid://c4s2g14fudycw" path="res://scripts/spawnSystem/enemySpawn.gd" id="9_0wgkg"]
+[ext_resource type="PackedScene" uid="uid://brc5inq83axq1" path="res://scenes/poss.tscn" id="9_whedg"]
+[ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="10_f8xhy"]
+[ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="11_5iq37"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_top_color = Color(0.31124508, 0.6307091, 0.7595706, 1)
@@ -19,6 +25,7 @@ sky_material = SubResource("ProceduralSkyMaterial_4wyf3")
 [sub_resource type="Environment" id="Environment_71j4m"]
 background_mode = 2
 background_color = Color(0.41762805, 0.5493688, 0.9999928, 1)
+background_energy_multiplier = 0.5
 sky = SubResource("Sky_k0juu")
 glow_enabled = true
 
@@ -29,11 +36,11 @@ environment = SubResource("Environment_71j4m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1337608601]
 transform = Transform3D(-0.8920127, -0.09156408, 0.44263935, 0.42327762, -0.5127828, 0.74692065, 0.15858674, 0.8536218, 0.49616572, 0, 6.0864086, -0.8943491)
-light_color = Color(1, 0.9686667, 0.53, 1)
+light_color = Color(0.95105034, 0.9216165, 0.82684344, 1)
 shadow_enabled = true
 
 [node name="Map" parent="." unique_id=1395991664 instance=ExtResource("1_lqthg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.025561213, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08649731, -0.025561213, -0.027105331)
 
 [node name="Player" parent="." unique_id=393122508 instance=ExtResource("2_yntwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79452467, 0, 4.220794)
@@ -41,40 +48,64 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79452467, 0, 4.220794)
 [node name="Camera3D" type="Camera3D" parent="Player" unique_id=1808341274]
 transform = Transform3D(1, 0, 0, 0, 0.7901846, 0.61286885, 0, -0.61286885, 0.7901846, 0, 3.8383412, 4.2724223)
 
+[node name="EnemySpawner" type="Node3D" parent="." unique_id=864967689 node_paths=PackedStringArray("spawn_points", "container")]
+script = ExtResource("9_0wgkg")
+enemy_scenes = Array[PackedScene]([ExtResource("10_f8xhy"), ExtResource("11_5iq37")])
+spawn_points = [NodePath("../SpawnPoints/Poin1"), NodePath("../SpawnPoints/Poin6"), NodePath("../SpawnPoints/Poin7"), NodePath("../SpawnPoints/Poin8"), NodePath("../SpawnPoints/Poin5"), NodePath("../SpawnPoints/Poin2"), NodePath("../SpawnPoints/Poin4")]
+container = NodePath("../Enemies")
+metadata/_custom_type_script = "uid://c4s2g14fudycw"
+
 [node name="Time" parent="." unique_id=838476929 instance=ExtResource("3_8sg25")]
+prep_duration = 10.0
+combat_duration = 10.0
 
 [node name="AmbienceController" type="Node" parent="." unique_id=385226719 node_paths=PackedStringArray("phase_timer", "sun", "world_env")]
 script = ExtResource("4_y5kws")
 phase_timer = NodePath("../Time")
 sun = NodePath("../DirectionalLight3D")
 world_env = NodePath("../WorldEnvironment")
+prep_light_color = Color(0.9529412, 0.92156863, 0.827451, 1)
+combat_light_energy = 0.6
+combat_light_color = Color(0.6023982, 0.71123236, 1, 1)
+combat_sky_top_color = Color(0.15899453, 0.23190483, 0.7067165, 1)
+combat_sky_horizon_color = Color(0.16078432, 0.23137255, 0.7058824, 1)
+combat_ground_color = Color(0.057800006, 0.086020045, 0.34, 1)
+transition_duration = 3.0
 
-[node name="tikus" parent="." unique_id=619417268 instance=ExtResource("5_0wgkg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7584627, 0.57520485, 4.086903)
+[node name="DayCycleManager" type="Node" parent="." unique_id=1091593011 node_paths=PackedStringArray("phase_timer", "enemy_spawner")]
+script = ExtResource("7_whedg")
+day_configs = Array[ExtResource("6_5iq37")]([ExtResource("7_f5xy7"), ExtResource("8_uni85")])
+phase_timer = NodePath("../Time")
+enemy_spawner = NodePath("../EnemySpawner")
 
-[node name="ulat" parent="." unique_id=2031096532 instance=ExtResource("6_yntwj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.178921, 0, 0)
+[node name="SpawnPoints" type="Node3D" parent="." unique_id=826425382]
 
-[node name="Tikus" parent="." unique_id=1088423783 instance=ExtResource("5_0wgkg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7599998, 0.5273717, 4.520387)
+[node name="Poin1" type="Marker3D" parent="SpawnPoints" unique_id=594902183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.002428, 0, 20.697666)
 
-[node name="Tikus2" parent="." unique_id=2106336343 instance=ExtResource("5_0wgkg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.128612, 0.5273722, -2.9299974)
+[node name="Poin6" type="Marker3D" parent="SpawnPoints" unique_id=96814100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.350462, 0, 0.37900925)
 
-[node name="Tikus3" parent="." unique_id=130060920 instance=ExtResource("5_0wgkg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.428601, 0.5273722, -6.7692595)
+[node name="Poin7" type="Marker3D" parent="SpawnPoints" unique_id=110882154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8149986, 1.9073486e-06, 35.31355)
 
-[node name="Tikus4" parent="." unique_id=1063591792 instance=ExtResource("5_0wgkg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.714366, 0.5273722, 10.001396)
+[node name="Poin8" type="Marker3D" parent="SpawnPoints" unique_id=1866753126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9784241, 1.9073486e-06, -20.45782)
 
-[node name="Ulat" parent="." unique_id=1816571730 instance=ExtResource("6_yntwj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.256197, 0.71629447, 6.833478)
+[node name="Poin5" type="Marker3D" parent="SpawnPoints" unique_id=835421682]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.015362, 0, 0.48583412)
 
-[node name="Ulat2" parent="." unique_id=1050540400 instance=ExtResource("6_yntwj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6599874, 0.71629447, -0.4615469)
+[node name="Poin2" type="Marker3D" parent="SpawnPoints" unique_id=315414868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.038841, 0, -18.391977)
 
-[node name="Ulat3" parent="." unique_id=872394244 instance=ExtResource("6_yntwj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.111498, 0.71629447, 7.4561806)
+[node name="Poin3" type="Marker3D" parent="SpawnPoints" unique_id=1389006781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.061127, -1.9073486e-06, -17.53314)
 
-[node name="Ulat4" parent="." unique_id=51253461 instance=ExtResource("6_yntwj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7287507, 0.71629405, -4.1048183)
+[node name="Poin4" type="Marker3D" parent="SpawnPoints" unique_id=2044818085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.067047, 0, 22.34701)
+
+[node name="Enemies" type="Node" parent="." unique_id=637664481]
+
+[node name="Poss" parent="." unique_id=300202430 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("9_whedg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.76583, 1.4305115e-06, 19.218952)
+day_cycle_manager = NodePath("../DayCycleManager")

@@ -1,7 +1,38 @@
 [gd_scene format=3 uid="uid://ldq2h2pvq1tv"]
 
-[ext_resource type="Texture2D" uid="uid://cguytv1tmhlw0" path="res://assets/sprites/ulat/Preview.png" id="2_2pk7l"]
+[ext_resource type="Texture2D" uid="uid://bsw6wvm51vk64" path="res://assets/sprites/Ulat_Attack/0001.png" id="2_76778"]
+[ext_resource type="Texture2D" uid="uid://cuntnp5xy4xew" path="res://assets/sprites/Ulat_Attack/0002.png" id="3_nal18"]
+[ext_resource type="Texture2D" uid="uid://dgy8ilqroak8v" path="res://assets/sprites/Ulat_Attack/0003.png" id="4_7edkd"]
 [ext_resource type="Script" uid="uid://bu4pcuh200tcq" path="res://scenes/enemy/ulat/ulat.gd" id="5_iufxt"]
+[ext_resource type="Texture2D" uid="uid://cxinonawhakrk" path="res://assets/sprites/Ulat_Attack/0004.png" id="5_y4pou"]
+[ext_resource type="Texture2D" uid="uid://cslexx0o4v6jw" path="res://assets/sprites/Ulat_Attack/0005.png" id="6_5h6v5"]
+[ext_resource type="Texture2D" uid="uid://c1snwif7esymj" path="res://assets/sprites/Ulat_Attack/0006.png" id="7_wrymf"]
+[ext_resource type="Texture2D" uid="uid://b0aoc2dtep40m" path="res://assets/sprites/Ulat_Attack/0007.png" id="8_tb1fl"]
+[ext_resource type="Texture2D" uid="uid://brfa0olg1iusd" path="res://assets/sprites/Ulat_Attack/0008.png" id="9_wsf1i"]
+[ext_resource type="Texture2D" uid="uid://bcnlh1t8q6v6u" path="res://assets/sprites/Ulat_Attack/0009.png" id="10_vps6x"]
+[ext_resource type="Texture2D" uid="uid://bnjsbym00lgbd" path="res://assets/sprites/Ulat_Attack/0010.png" id="11_b7x36"]
+[ext_resource type="Texture2D" uid="uid://4e86jjibnrl0" path="res://assets/sprites/Ulat_Attack/0011.png" id="12_0x6u4"]
+[ext_resource type="Texture2D" uid="uid://cm5028j8w3n0c" path="res://assets/sprites/Ulat_Attack/0012.png" id="13_smvmf"]
+[ext_resource type="Texture2D" uid="uid://dms5lfjo0ptgu" path="res://assets/sprites/Ulat_Attack/0013.png" id="14_1twww"]
+[ext_resource type="Texture2D" uid="uid://bhumxjxjngncf" path="res://assets/sprites/Ulat_Attack/0014.png" id="15_lrkeh"]
+[ext_resource type="Texture2D" uid="uid://kas0sontgjhq" path="res://assets/sprites/Ulat_Attack/0015.png" id="16_4dkvx"]
+[ext_resource type="Texture2D" uid="uid://bhrjoxx35rrru" path="res://assets/sprites/Ulat_Attack/0016.png" id="17_jgkcm"]
+[ext_resource type="Texture2D" uid="uid://d1g7e3l31gbev" path="res://assets/sprites/Ulat_Walk/0001.png" id="18_uq5xu"]
+[ext_resource type="Texture2D" uid="uid://llal8w82pc0c" path="res://assets/sprites/Ulat_Walk/0002.png" id="19_3kwbl"]
+[ext_resource type="Texture2D" uid="uid://c4at37pf43p0i" path="res://assets/sprites/Ulat_Walk/0003.png" id="20_83ljd"]
+[ext_resource type="Texture2D" uid="uid://biclc74ba4vve" path="res://assets/sprites/Ulat_Walk/0004.png" id="21_r0dtk"]
+[ext_resource type="Texture2D" uid="uid://lag1am21011i" path="res://assets/sprites/Ulat_Walk/0005.png" id="22_r3ur8"]
+[ext_resource type="Texture2D" uid="uid://b6q1pbddmt15q" path="res://assets/sprites/Ulat_Walk/0006.png" id="23_06t1j"]
+[ext_resource type="Texture2D" uid="uid://djmbonbuuw1p2" path="res://assets/sprites/Ulat_Walk/0007.png" id="24_v0ngm"]
+[ext_resource type="Texture2D" uid="uid://bpnedbaw37del" path="res://assets/sprites/Ulat_Walk/0008.png" id="25_fnj0j"]
+[ext_resource type="Texture2D" uid="uid://bifsycgw7wbmp" path="res://assets/sprites/Ulat_Walk/0009.png" id="26_i0pb5"]
+[ext_resource type="Texture2D" uid="uid://y85dwegloblw" path="res://assets/sprites/Ulat_Walk/0010.png" id="27_c31qy"]
+[ext_resource type="Texture2D" uid="uid://u2dldsg8uy62" path="res://assets/sprites/Ulat_Walk/0011.png" id="28_24vyh"]
+[ext_resource type="Texture2D" uid="uid://bid1eqvf1v1u6" path="res://assets/sprites/Ulat_Walk/0012.png" id="29_rllu0"]
+[ext_resource type="Texture2D" uid="uid://cjwbg2cbormlj" path="res://assets/sprites/Ulat_Walk/0013.png" id="30_o1w1h"]
+[ext_resource type="Texture2D" uid="uid://cqsr54eg5nexn" path="res://assets/sprites/Ulat_Walk/0014.png" id="31_27lr4"]
+[ext_resource type="Texture2D" uid="uid://rfvta765y8bi" path="res://assets/sprites/Ulat_Walk/0015.png" id="32_0m7l7"]
+[ext_resource type="Texture2D" uid="uid://l02fmibg44j" path="res://assets/sprites/Ulat_Walk/0016.png" id="33_xi7sn"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_71j4m"]
 radius = 0.25
@@ -11,7 +42,52 @@ height = 1.3
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2pk7l")
+"texture": ExtResource("2_76778")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nal18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7edkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y4pou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5h6v5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wrymf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tb1fl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wsf1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vps6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b7x36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0x6u4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_smvmf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1twww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lrkeh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_4dkvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_jgkcm")
 }],
 "loop": 1,
 "name": &"attack",
@@ -19,7 +95,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2pk7l")
+"texture": ExtResource("18_uq5xu")
 }],
 "loop": 1,
 "name": &"idle",
@@ -27,7 +103,52 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_2pk7l")
+"texture": ExtResource("18_uq5xu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_3kwbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_83ljd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_r0dtk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_r3ur8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_06t1j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_v0ngm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_fnj0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_i0pb5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_c31qy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_24vyh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_rllu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_o1w1h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_27lr4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_0m7l7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_xi7sn")
 }],
 "loop": 1,
 "name": &"walk",
@@ -48,7 +169,7 @@ shape = SubResource("CapsuleShape3D_71j4m")
 [node name="Visual" type="Node3D" parent="." unique_id=382881381]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visual" unique_id=1298061559]
-transform = Transform3D(0.25506106, 0, 0, 0, 0.25506106, 0, 0, 0, 0.25506106, 0, 0.5690569, 0)
+transform = Transform3D(1.685, 0, 0, 0, 1.685, 0, 0, 0, 1.685, 0, 0.46591628, 0)
 sprite_frames = SubResource("SpriteFrames_gxfs2")
 animation = &"attack"
 

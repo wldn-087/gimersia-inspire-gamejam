@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://brc5inq83axq1"]
+
+[ext_resource type="Script" uid="uid://caoo3d342hb1l" path="res://scenes/backgroud/poss.gd" id="1_jsis6"]
+[ext_resource type="PackedScene" uid="uid://pmduuid0e5c5" path="res://assets/model-3d/poss.glb" id="1_kppot"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p5viw"]
+size = Vector3(6, 3.0164795, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
+size = Vector3(3.46, 3.5015528, 3.445)
+
+[node name="Area3D" type="Area3D" unique_id=300202430]
+script = ExtResource("1_jsis6")
+prompt_text = "Rest"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=303872454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5082397, 0)
+shape = SubResource("BoxShape3D_p5viw")
+
+[node name="Poss" type="StaticBody3D" parent="." unique_id=1150633937]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Poss" unique_id=719564520]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7608209, 0)
+shape = SubResource("BoxShape3D_uj04i")
+
+[node name="poss" parent="Poss" unique_id=1829155894 instance=ExtResource("1_kppot")]
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1208278531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.324051, 0)
+billboard = 1
+double_sided = false
+text = "Press E to Rest"
