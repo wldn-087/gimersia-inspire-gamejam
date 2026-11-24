@@ -66,6 +66,7 @@
 [ext_resource type="Texture2D" uid="uid://riny66me0pik" path="res://assets/sprites/player/walk/0013.png" id="30_kssj8"]
 [ext_resource type="Texture2D" uid="uid://lp5j4p0urxg1" path="res://assets/sprites/player/walk/0014.png" id="31_8lfxt"]
 [ext_resource type="Texture2D" uid="uid://6mt5xbs4rgv7" path="res://assets/sprites/player/walk/0015.png" id="32_lclul"]
+[ext_resource type="Texture2D" uid="uid://de2daoboiukcm" path="res://assets/sprites/Shadow.png" id="61_pwfqx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uj04i"]
 animations = [{
@@ -341,6 +342,11 @@ sprite_frames = SubResource("SpriteFrames_uj04i")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="Shadow" type="Sprite3D" parent="Visual" unique_id=717083528]
+transform = Transform3D(0.26415685, 0, 0, 0, -6.1930723e-09, 0.26415685, 0, -0.14168097, -1.1546663e-08, 0, 0.017, 0)
+double_sided = false
+texture = ExtResource("61_pwfqx")
+
 [node name="BodyShape" type="CollisionShape3D" parent="." unique_id=1611510781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_uj04i")
@@ -370,12 +376,11 @@ script = ExtResource("10_h17s1")
 metadata/_custom_type_script = "uid://dxbgm3kuoruf"
 
 [node name="HitBox" type="Area3D" parent="." unique_id=555497455]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80264246, 0.5888803, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.69543445, 0.79436195, 0)
 collision_layer = 8
 collision_mask = 2
 
 [node name="HitBoxShape" type="CollisionShape3D" parent="HitBox" unique_id=715033369]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1931318, 0, 0)
 shape = SubResource("SphereShape3D_uj04i")
 disabled = true
 
