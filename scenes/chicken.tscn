@@ -127,7 +127,7 @@ shaded = true
 double_sided = false
 sprite_frames = SubResource("SpriteFrames_uj04i")
 animation = &"has_egg"
-frame_progress = 0.65559995
+frame_progress = 0.27093485
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2057556917]
 transform = Transform3D(0.39336956, 0, 0, 0, -1.0276022e-08, -0.39336956, 0, 0.23508799, -1.7194727e-08, 0, 0, -0.23470068)

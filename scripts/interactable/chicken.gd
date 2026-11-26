@@ -64,9 +64,6 @@ func interact() -> void:
 	if health_component.current_health <= 0.0:
 		return
 
-	if health_component.current_health >= health_component.max_health:
-		return
-
 	health_component.heal(heal_amount)
 
 	has_egg = false
