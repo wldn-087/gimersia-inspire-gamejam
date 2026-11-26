@@ -30,3 +30,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.324051, 0)
 billboard = 1
 double_sided = false
 text = "Press E to Rest"
+font_size = 64

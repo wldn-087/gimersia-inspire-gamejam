@@ -53,7 +53,7 @@ func _on_phase_changed(new_phase: String) -> void:
 	var is_prep: bool = new_phase == "PREP"
 	print("[Ambience] ", new_phase)
 	
-	if !is_prep:
+	if new_phase != "RESTING":
 		_rotate_sun()
 	
 	var env: Environment = world_env.environment

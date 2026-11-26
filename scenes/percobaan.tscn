@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://brc5inq83axq1" path="res://scenes/poss.tscn" id="9_whedg"]
 [ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="10_f8xhy"]
 [ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="11_5iq37"]
+[ext_resource type="PackedScene" uid="uid://b63qn77dauth5" path="res://scenes/chicken.tscn" id="13_f5xy7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_top_color = Color(0.31124508, 0.6307091, 0.7595706, 1)
@@ -109,4 +110,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.067047, 0, 22.34701)
 
 [node name="Poss" parent="." unique_id=300202430 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("9_whedg")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.76583, 1.4305115e-06, 19.218952)
+day_cycle_manager = NodePath("../DayCycleManager")
+
+[node name="Chicken" parent="." unique_id=891402727 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("13_f5xy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.061277, 0.12274757, 23.405205)
 day_cycle_manager = NodePath("../DayCycleManager")
