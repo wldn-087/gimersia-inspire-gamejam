@@ -109,3 +109,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.067047, 0, 22.34701)
 [node name="Poss" parent="." unique_id=300202430 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("9_whedg")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.76583, 1.4305115e-06, 19.218952)
 day_cycle_manager = NodePath("../DayCycleManager")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1780691332]
+
+[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1894760538]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -424.5
+offset_top = -251.5
+offset_right = 424.5
+offset_bottom = 251.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Panel" unique_id=2029419055]
+layout_mode = 0
+offset_left = 65.5
+offset_top = 25.5
+offset_right = 793.5
+offset_bottom = 462.5
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/ScrollContainer" unique_id=351229224]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel/ScrollContainer/VBoxContainer" unique_id=1435974682]
+layout_mode = 2
+bbcode_enabled = true
+text = "Surat dari Pak RT untuk Pendatang Baru
+
+Halo, nak! Selamat datang di desa kami! Saya Pak RT yang bertanggung jawab mengurus keamanan dan ketertiban warga di sini.
+
+Belakangan ini ada sedikit masalah yang mulai mengganggu aktivitas warga. Beberapa warga kami punya kesibukan masing-masing, pertanian kami jadi sepi. Apalagi hama pertanian.
+
+Nah, karena kamu sudah berada di sini, bagaimana kalau kamu menggarap lahanmu seperti warga lainnya?
+ 
+Oh iya! Ada satu hal penting yang hampir saya lupakan. Hama biasanya mulai keluar ketika malam tiba. Mereka bisa menyerang tanaman, merusak ladang, bahkan mengganggu persediaan makanan warga.
+
+Pastikan ladangmu sudah terlindungi sebelum matahari terbenam! Kamu bisa memasang pagar, menyiapkan perlengkapan, atau meminta bantuan warga. Dan ingat... 
+
+jangan sampai kamu terlalu sibuk bertani sampai lupa memperhatikan waktu!
+
+Salam hangat,
+Pak RT"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
