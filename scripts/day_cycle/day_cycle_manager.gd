@@ -1,3 +1,4 @@
+
 extends Node
 class_name DayCycleManager
 
@@ -22,6 +23,9 @@ var current_day: int = 1
 var current_phase: Phase = Phase.PREPARATION
 var current_config: DayConfig
 
+# Menandakan timer Combat sudah selesai.
+var _combat_timer_finished: bool = false
+
 
 func _ready() -> void:
 	if phase_timer == null or enemy_spawner == null:
@@ -29,6 +33,7 @@ func _ready() -> void:
 		return
 
 	phase_timer.phase_finished.connect(_on_phase_finished)
+	enemy_spawner.enemy_count_changed.connect(_on_enemy_count_changed)
 
 	start_day(starting_day)
 
@@ -71,6 +76,8 @@ func _start_preparation() -> void:
 
 func _start_night() -> void:
 	current_phase = Phase.COMBAT
+	_combat_timer_finished = false
+
 	phase_changed.emit(current_phase)
 
 	enemy_spawner.apply_day_config(current_config)
@@ -90,13 +97,40 @@ func _start_rest() -> void:
 
 	phase_timer.set_phase(PhaseTimer.Phase.RESTING)
 
+	print("Hari %d selesai. Pemain dapat beristirahat." % current_day)
+
 
 func _on_phase_finished(phase: PhaseTimer.Phase) -> void:
 	if phase == PhaseTimer.Phase.PREP:
 		_start_night()
 
 	elif phase == PhaseTimer.Phase.COMBAT:
-		_start_rest()
+		_combat_timer_finished = true
+
+		# Tidak ada musuh baru yang di-spawn setelah timer selesai.
+		enemy_spawner.stop()
+
+		_check_rest_condition()
+
+
+func _on_enemy_count_changed(count: int) -> void:
+	print("Musuh tersisa: ", count)
+
+	if current_phase == Phase.COMBAT:
+		_check_rest_condition()
+
+
+func _check_rest_condition() -> void:
+	if current_phase != Phase.COMBAT:
+		return
+
+	if not _combat_timer_finished:
+		return
+
+	if enemy_spawner.alive_count > 0:
+		return
+
+	_start_rest()
 
 
 func request_rest() -> void:

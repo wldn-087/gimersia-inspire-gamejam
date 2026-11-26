@@ -110,3 +110,4 @@ func spawn_one() -> void:
 func _on_enemy_removed() -> void:
 	_alive_count = maxi(_alive_count - 1, 0)
 	enemy_count_changed.emit(_alive_count)
+	print(_alive_count)

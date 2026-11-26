@@ -5,6 +5,10 @@ class_name AmbienceController
 @export var sun: DirectionalLight3D
 @export var world_env: WorldEnvironment
 
+@export_group("Sun Rotation")
+@export var sun_rotation_duration: float = 10
+@export var sun_rotation_amount: float = 360.0
+
 @export_group("PREP (terang)")
 @export var prep_light_energy: float = 1.0
 @export var prep_ambient_energy: float = 1.0
@@ -48,7 +52,10 @@ func _ready() -> void:
 func _on_phase_changed(new_phase: String) -> void:
 	var is_prep: bool = new_phase == "PREP"
 	print("[Ambience] ", new_phase)
-
+	
+	if !is_prep:
+		_rotate_sun()
+	
 	var env: Environment = world_env.environment
 	if _tween and _tween.is_valid():
 		_tween.kill()
@@ -75,3 +82,23 @@ func _on_phase_changed(new_phase: String) -> void:
 	else:
 		_tween.tween_property(env, "background_energy_multiplier",
 			1.0 if is_prep else 0.15, transition_duration)
+
+func _rotate_sun() -> void:
+	var initial_rotation := sun.global_rotation
+	var target_rotation := initial_rotation + Vector3(
+		0.0,
+		deg_to_rad(sun_rotation_amount),
+		0.0
+	)
+
+	var tween := create_tween()
+	tween.tween_property(
+		sun,
+		"global_rotation",
+		target_rotation,
+		sun_rotation_duration
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_callback(func():
+		sun.global_rotation = initial_rotation
+	)

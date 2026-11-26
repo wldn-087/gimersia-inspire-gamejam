@@ -64,6 +64,7 @@ script = ExtResource("4_y5kws")
 phase_timer = NodePath("../Time")
 sun = NodePath("../DirectionalLight3D")
 world_env = NodePath("../WorldEnvironment")
+sun_rotation_duration = 5.0
 prep_light_color = Color(0.9529412, 0.92156863, 0.827451, 1)
 combat_light_energy = 0.6
 combat_light_color = Color(0.6023982, 0.71123236, 1, 1)
