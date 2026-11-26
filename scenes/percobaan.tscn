@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://brc5inq83axq1" path="res://scenes/poss.tscn" id="9_whedg"]
 [ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="10_f8xhy"]
 [ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="11_5iq37"]
+[ext_resource type="Texture2D" uid="uid://dtd46wm5t75yv" path="res://assets/textures/background.jpeg" id="13_f5xy7"]
+[ext_resource type="Script" uid="uid://0ml8j3q4d2dc" path="res://scenes/paper.gd" id="13_ymbbf"]
+[ext_resource type="Texture2D" uid="uid://b5m4aeerer7uy" path="res://assets/textures/chrome_r69kGGGZvb.png" id="15_a5ew6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_top_color = Color(0.31124508, 0.6307091, 0.7595706, 1)
@@ -112,7 +115,7 @@ day_cycle_manager = NodePath("../DayCycleManager")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1780691332]
 
-[node name="Panel" type="Panel" parent="CanvasLayer" unique_id=1894760538]
+[node name="Paper" type="Panel" parent="CanvasLayer" unique_id=1894760538]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -124,21 +127,41 @@ offset_right = 424.5
 offset_bottom = 251.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("13_ymbbf")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Panel" unique_id=2029419055]
-layout_mode = 0
-offset_left = 65.5
-offset_top = 25.5
-offset_right = 793.5
-offset_bottom = 462.5
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Paper" unique_id=1770433722]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("13_f5xy7")
+expand_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Paper" unique_id=2029419055]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -349.0
+offset_top = -218.5
+offset_right = 352.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Panel/ScrollContainer" unique_id=351229224]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Paper/ScrollContainer" unique_id=351229224]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Panel/ScrollContainer/VBoxContainer" unique_id=1435974682]
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Paper/ScrollContainer/VBoxContainer" unique_id=1435974682]
 layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
 text = "Surat dari Pak RT untuk Pendatang Baru
 
@@ -159,3 +182,14 @@ Pak RT"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/Paper" unique_id=248678864]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -84.0
+offset_bottom = 66.0
+grow_horizontal = 0
+icon = ExtResource("15_a5ew6")
+flat = true
