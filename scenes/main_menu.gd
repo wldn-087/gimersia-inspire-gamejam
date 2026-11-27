@@ -7,6 +7,7 @@ const GAME_SCENE = "res://scenes/percobaan.tscn"
 
 func _ready() -> void:
 	continue_btn.disabled = not SaveManager.has_save()
+	SaveManager.debug_get_save_path()
 
 
 func _on_continue_pressed() -> void:

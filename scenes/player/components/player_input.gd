@@ -13,3 +13,5 @@ func is_running():
 func attack_input() -> bool:
 	return Input.is_action_just_released("attack_melee")
 	
+func is_dashing():
+	return Input.is_action_just_pressed("dash")
