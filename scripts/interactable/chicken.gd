@@ -5,8 +5,11 @@ class_name Chicken
 @export_group("References")
 @export var day_cycle_manager: DayCycleManager
 
+@onready var chicken: AnimatedSprite3D = $AnimatedSprite3D
+
 @export_group("Egg")
 @export var heal_amount: float = 25.0
+@onready var egg_animation: AnimationPlayer = $AnimationPlayer
 
 var has_egg: bool = false
 var _last_produced_day: int = -1
@@ -38,6 +41,8 @@ func _on_day_changed(day: int) -> void:
 
 	has_egg = true
 	interaction_enabled = true
+	chicken.play("has_egg")
+	egg_animation.play("floating")
 
 	print("Ayam menghasilkan telur pada hari ", day)
 
@@ -68,5 +73,7 @@ func interact() -> void:
 
 	has_egg = false
 	interaction_enabled = false
+	chicken.play("normal")
+	egg_animation.play("pop")
 
 	print("Telur digunakan. Player mendapatkan ", heal_amount, " HP.")

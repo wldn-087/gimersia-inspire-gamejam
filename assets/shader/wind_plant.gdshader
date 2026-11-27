@@ -2,6 +2,7 @@
 shader_type spatial;
 render_mode cull_disabled;
 
+
 uniform sampler2D albedo_texture : source_color;
 uniform float wind_strength = 0.12;
 uniform float wind_speed = 2.0;
@@ -30,7 +31,7 @@ void fragment() {
 
     ALBEDO = tex.rgb;
     ALPHA = tex.a;
-
+	
     // Menghilangkan bagian transparan sepenuhnya.
     ALPHA_SCISSOR_THRESHOLD = alpha_threshold;
 

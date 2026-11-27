@@ -6,6 +6,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_e6ept")
+shader_parameter/cull_mode = 2
 shader_parameter/albedo_texture = ExtResource("1_ov7mh")
 shader_parameter/wind_strength = 0.08
 shader_parameter/wind_speed = 0.75
