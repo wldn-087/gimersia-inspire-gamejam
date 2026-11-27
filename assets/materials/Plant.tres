@@ -1,10 +1,14 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dy0t18xqa4xe1"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dy0t18xqa4xe1"]
 
+[ext_resource type="Shader" uid="uid://btlet0l4m3cr2" path="res://assets/shader/wind_plant.gdshader" id="1_e6ept"]
 [ext_resource type="Texture2D" uid="uid://61oiob8un00a" path="res://assets/textures/Jagung.png" id="1_ov7mh"]
 
 [resource]
-resource_name = "Plant"
-transparency = 4
-cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
-albedo_texture = ExtResource("1_ov7mh")
+render_priority = 0
+shader = ExtResource("1_e6ept")
+shader_parameter/cull_mode = 2
+shader_parameter/albedo_texture = ExtResource("1_ov7mh")
+shader_parameter/wind_strength = 0.08
+shader_parameter/wind_speed = 0.75
+shader_parameter/plant_height = 2.0
+shader_parameter/alpha_threshold = 0.5

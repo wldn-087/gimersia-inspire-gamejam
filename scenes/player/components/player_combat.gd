@@ -5,7 +5,6 @@ class_name PlayerCombat
 var player: Player
 var anim_handler: AnimationHandler
 var player_input: PlayerInput
-var locomotion: PlayerLocomotion
 
 @export_group("Attacks")
 @export var melee_attack: AttackData
@@ -19,7 +18,6 @@ func start(owner: Player) -> void:
 	player = owner
 	anim_handler = player.anim_player
 	player_input = player.player_input
-	locomotion = player.player_locomotion
 
 	melee_hitbox.monitoring = true
 	deactivate_hitbox()

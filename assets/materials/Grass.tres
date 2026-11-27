@@ -1,11 +1,13 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dwpxmxxwqygt5"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://vcolq78afoat"]
 
 [ext_resource type="Texture2D" uid="uid://bgydygdgxjq02" path="res://assets/textures/Grass.png" id="1_6karp"]
+[ext_resource type="Shader" uid="uid://btlet0l4m3cr2" path="res://assets/shader/wind_plant.gdshader" id="1_y1qbl"]
 
 [resource]
-resource_name = "Grass"
-transparency = 4
-cull_mode = 2
-albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
-albedo_texture = ExtResource("1_6karp")
-roughness = 0.86
+render_priority = 0
+shader = ExtResource("1_y1qbl")
+shader_parameter/albedo_texture = ExtResource("1_6karp")
+shader_parameter/wind_strength = 0.12
+shader_parameter/wind_speed = 2.0
+shader_parameter/plant_height = 0.3
+shader_parameter/alpha_threshold = 0.5

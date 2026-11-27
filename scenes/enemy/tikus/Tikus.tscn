@@ -259,7 +259,7 @@ animations = [{
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 12.0
+"speed": 22.0
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7r4gi"]
@@ -280,7 +280,8 @@ transform = Transform3D(0.16577028, 0, 0, 0, 0.16577028, 0, 0, 0, 0.16577028, 0,
 shaded = true
 double_sided = false
 sprite_frames = SubResource("SpriteFrames_gxfs2")
-animation = &"dead"
+animation = &"walk"
+frame_progress = 0.76647085
 
 [node name="Shadow" type="Sprite3D" parent="Visual" unique_id=181430810]
 transform = Transform3D(0.26415685, 0, 0, 0, -4.230255e-09, 0.26415685, 0, -0.09677695, -1.1546663e-08, 0, 0.017469645, 2.1504126e-08)
