@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://ldq2h2pvq1tv" path="res://scenes/enemy/ulat/Ulat.tscn" id="10_f8xhy"]
 [ext_resource type="PackedScene" uid="uid://dsin0dx1cxi50" path="res://scenes/enemy/tikus/Tikus.tscn" id="11_5iq37"]
 [ext_resource type="PackedScene" uid="uid://b63qn77dauth5" path="res://scenes/chicken.tscn" id="13_f5xy7"]
-[ext_resource type="Texture2D" uid="uid://dtd46wm5t75yv" path="res://assets/textures/background.jpeg" id="13_f5xy7"]
 [ext_resource type="Script" uid="uid://0ml8j3q4d2dc" path="res://scenes/paper.gd" id="13_ymbbf"]
 [ext_resource type="Texture2D" uid="uid://b5m4aeerer7uy" path="res://assets/textures/chrome_r69kGGGZvb.png" id="15_a5ew6"]
+[ext_resource type="Texture2D" uid="uid://dtd46wm5t75yv" path="res://assets/textures/background.jpeg" id="15_mp73e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4wyf3"]
 sky_top_color = Color(0.31124508, 0.6307091, 0.7595706, 1)
@@ -83,6 +83,10 @@ day_configs = Array[ExtResource("6_5iq37")]([ExtResource("7_f5xy7"), ExtResource
 phase_timer = NodePath("../Time")
 enemy_spawner = NodePath("../EnemySpawner")
 
+[node name="Chicken" parent="." unique_id=891402727 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("13_f5xy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.33593, 0.08372122, 23.77973)
+day_cycle_manager = NodePath("../DayCycleManager")
+
 [node name="SpawnPoints" type="Node3D" parent="." unique_id=826425382]
 
 [node name="Poin1" type="Marker3D" parent="SpawnPoints" unique_id=594902183]
@@ -115,13 +119,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.067047, 0, 22.34701)
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17.76583, 1.4305115e-06, 19.218952)
 day_cycle_manager = NodePath("../DayCycleManager")
 
-[node name="Chicken" parent="." unique_id=891402727 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("13_f5xy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.061277, 0.12274757, 23.405205)
-day_cycle_manager = NodePath("../DayCycleManager")
-
-[node name="Chicken" parent="." unique_id=891402727 node_paths=PackedStringArray("day_cycle_manager") instance=ExtResource("13_f5xy7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.061277, 0.12274757, 23.405205)
-day_cycle_manager = NodePath("../DayCycleManager")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1780691332]
 
 [node name="Paper" type="Panel" parent="CanvasLayer" unique_id=1894760538]
@@ -146,7 +143,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("13_f5xy7")
+texture = ExtResource("15_mp73e")
 expand_mode = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Paper" unique_id=2029419055]
@@ -172,25 +169,35 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 bbcode_enabled = true
-text = "Surat dari Pak RT untuk Pendatang Baru
+text = "
+[center][font_size=24][b]Surat dari Pak RT[/b][/font_size]
+[font_size=16]Untuk Pendatang Baru[/font_size][/center]
 
-Halo, nak! Selamat datang di desa kami! Saya Pak RT yang bertanggung jawab mengurus keamanan dan ketertiban warga di sini.
+[font_size=16]Halo, Nak![/font_size]
 
-Belakangan ini ada sedikit masalah yang mulai mengganggu aktivitas warga. Beberapa warga kami punya kesibukan masing-masing, pertanian kami jadi sepi. Apalagi hama pertanian.
+Selamat datang di desa kami! Saya Pak RT yang bertanggung jawab mengurus keamanan dan ketertiban warga di sini.
 
-Nah, karena kamu sudah berada di sini, bagaimana kalau kamu menggarap lahanmu seperti warga lainnya?
- 
-Oh iya! Ada satu hal penting yang hampir saya lupakan. Hama biasanya mulai keluar ketika malam tiba. Mereka bisa menyerang tanaman, merusak ladang, bahkan mengganggu persediaan makanan warga.
+Belakangan ini ada sedikit masalah yang mulai mengganggu aktivitas warga. Beberapa warga kami punya kesibukan masing-masing, sehingga pertanian menjadi sepi. Apalagi, hama pertanian mulai meresahkan.
 
-Pastikan ladangmu sudah terlindungi sebelum matahari terbenam! Kamu bisa memasang pagar, menyiapkan perlengkapan, atau meminta bantuan warga. Dan ingat... 
+Nah, karena kamu sudah berada di sini, bagaimana kalau kamu ikut menggarap lahanmu seperti warga lainnya?
 
-jangan sampai kamu terlalu sibuk bertani sampai lupa memperhatikan waktu!
+[font_size=18][b]Ada satu hal penting![/b][/font_size]
 
-Salam hangat,
-Pak RT"
+Hama biasanya mulai keluar ketika malam tiba. Mereka bisa menyerang tanaman, merusak ladang, bahkan mengganggu persediaan makanan warga.
+
+[color=brown][b]Jangan Sampai tanaman dirusak Hama![/b][/color]
+
+Kamu bisa memasang pagar, menyiapkan perlengkapan, atau meminta bantuan warga.
+
+Dan ingat...
+
+[center][i][b]Jangan sampai kamu terlalu sibuk bertani sampai lupa memperhatikan waktu![/b][/i][/center]
+
+[right]Salam hangat,
+[b]Pak RT[/b][/right]
+"
 fit_content = true
 scroll_active = false
-horizontal_alignment = 1
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/Paper" unique_id=248678864]
 layout_mode = 1
