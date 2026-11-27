@@ -20,3 +20,6 @@ class_name DayConfig
 @export_group("Spawn Weight")
 @export var worm_spawn_weight: float = 1.0
 @export var rat_spawn_weight: float = 1.0
+
+@export_group("Plant Growth")
+@export_range(0, 3) var plant_growth_stage: int = 0 

@@ -53,7 +53,8 @@ func start_day(day: int) -> void:
 	current_config = config
 
 	day_changed.emit(current_day)
-
+	update_plant_growth(current_config)
+	
 	if current_config.preparation_duration > 0.0:
 		_start_preparation()
 	else:
@@ -66,6 +67,13 @@ func _find_day_config(day: int) -> DayConfig:
 			return config
 
 	return null
+
+func update_plant_growth(config: DayConfig) -> void:
+	if config == null: return
+
+	for lahan in get_tree().get_nodes_in_group("saveable_plants"):
+		if is_instance_valid(lahan) and lahan.has_method("apply_growth_stage"):
+			lahan.apply_growth_stage(config.plant_growth_stage)
 
 
 func _start_preparation() -> void:
