@@ -28,3 +28,4 @@ func heal(amount: float) -> void:
 		
 	current_health = clamp(current_health + amount, 0.0, max_health)
 	health_changed.emit(current_health, max_health)
+	

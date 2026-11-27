@@ -26,14 +26,18 @@ var current_config: DayConfig
 # Menandakan timer Combat sudah selesai.
 var _combat_timer_finished: bool = false
 
-
 func _ready() -> void:
+	add_to_group("day_cycle_manager")
+	
 	if phase_timer == null or enemy_spawner == null:
 		push_error("DayCycleManager: Referensi belum lengkap.")
 		return
 
 	phase_timer.phase_finished.connect(_on_phase_finished)
 	enemy_spawner.enemy_count_changed.connect(_on_enemy_count_changed)
+
+	if SaveManager.has_pending_save():
+		return
 
 	start_day(starting_day)
 
@@ -137,4 +141,13 @@ func request_rest() -> void:
 	if current_phase != Phase.RESTING:
 		return
 
-	start_day(current_day + 1)
+	if current_day >= 10:
+		return
+		
+	var next_day = current_day + 1
+	
+	if not SaveManager.save_next_day(next_day):
+		push_error("Gagal menyimpan progress.")
+		return
+
+	start_day(next_day)
