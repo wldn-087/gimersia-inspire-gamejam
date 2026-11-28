@@ -1,13 +1,15 @@
-
 extends RefCounted
 class_name BossAI
+
+const PLAYER_AGGRO_RANGE: float = 5.0
+const PLAYER_LEASH_RANGE: float = 20.0
+const TARGET_UPDATE_INTERVAL: float = 0.2
 
 var boss: BoarBoss
 var locomotion: BossLocomotion
 var combat: BossCombat
 
-var think_timer := 0.0
-var think_interval := 0.25
+var target_timer := 0.0
 
 
 func _init(
@@ -22,55 +24,71 @@ func _init(
 
 func update(delta: float) -> void:
 	combat.update(delta)
+	_update_target(delta)
 
 	if boss.target == null:
 		locomotion.stop()
+		boss.play_boss_animation("idle")
 		return
 
 	if combat.is_attacking:
 		locomotion.stop()
 		return
 
-	if locomotion.is_charging:
+	var distance := _flat_distance_to(boss.target)
+
+	if combat.try_attack(distance):
+		locomotion.stop()
 		return
 
-	think_timer -= delta
+	locomotion.move_to_target()
 
-	if think_timer > 0.0:
+
+func _update_target(delta: float) -> void:
+	target_timer -= delta
+	if target_timer > 0.0:
+		return
+	target_timer = TARGET_UPDATE_INTERVAL
+
+	var player: Player = boss._find_player(boss.get_tree().current_scene)
+
+	if boss.target is Player:
+		if not is_instance_valid(boss.target):
+			boss.target = _find_nearest_plant()
+		elif player == null:
+			boss.target = _find_nearest_plant()
+		elif _flat_distance_to(player) > PLAYER_LEASH_RANGE:
+			boss.target = _find_nearest_plant()
 		return
 
-	think_timer = think_interval
+	if player != null and _flat_distance_to(player) <= PLAYER_AGGRO_RANGE:
+		boss.target = player
+		return
 
-	var distance := boss.global_position.distance_to(
-		boss.target.global_position
-	)
-
-	_choose_action(distance)
+	if boss.target == null or not is_instance_valid(boss.target):
+		boss.target = _find_nearest_plant()
 
 
-func _choose_action(distance: float) -> void:
-	if distance <= 2.5:
-		locomotion.stop()
+func _find_nearest_plant() -> Node3D:
+	var nearest: Node3D = null
+	var nearest_distance := INF
 
-		if combat.can_attack("tusk_swing"):
-			combat.use_attack("tusk_swing")
-		elif combat.can_attack("ground_slam"):
-			combat.use_attack("ground_slam")
+	for node in boss.get_tree().get_nodes_in_group("saveable_plants"):
+		if not node is Node3D:
+			continue
 
-	elif distance <= 4.0:
-		locomotion.stop()
+		var distance := _flat_distance_to(node)
+		if distance < nearest_distance:
+			nearest_distance = distance
+			nearest = node
 
-		if combat.can_attack("ground_slam"):
-			combat.use_attack("ground_slam")
-		else:
-			locomotion.move_to_target()
+	return nearest
 
-	else:
-		if combat.can_attack("charge"):
-			locomotion.start_charge()
-			combat.use_attack("charge")
-		else:
-			locomotion.move_to_target()
+
+func _flat_distance_to(node: Node3D) -> float:
+	var offset := node.global_position - boss.global_position
+	offset.y = 0.0
+	return offset.length()
 
 
 func stop() -> void:
