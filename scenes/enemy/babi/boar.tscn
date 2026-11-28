@@ -571,17 +571,6 @@ animations = [{
 
 [node name="Boar" type="CharacterBody3D" unique_id=555301906]
 script = ExtResource("1_sdfmn")
-max_health = null
-move_speed = null
-stop_distance = null
-sight_radius = null
-lose_sight_delay = null
-aggro_on_player = null
-damage = null
-attack_range = null
-attack_cooldown = null
-attack_hit_delay = null
-attack_duration = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1646786783]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.060371518, 0.4142908, 0)
