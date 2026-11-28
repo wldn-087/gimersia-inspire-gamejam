@@ -11,13 +11,17 @@ var boss_combat: BossCombat
 func _on_ready() -> void:
 	max_health = 750.0
 	move_speed = 3.0
+	stop_distance = 1.5
 	damage = 25.0
-	attack_range = 2.0
+	attack_range = 2.5
 	attack_cooldown = 5.0
 	reset_health()
 
 	boss_locomotion = BossLocomotion.new(self)
+
 	boss_combat = BossCombat.new(self)
+	add_child(boss_combat)
+
 	boss_ai = BossAI.new(self, boss_locomotion, boss_combat)
 
 	boss_sprite.play("idle")
@@ -27,24 +31,18 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
-	if target == null:
-		target = _find_player(get_tree().current_scene)
-
-	_targeting.update(delta)
-
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	boss_ai.update(delta)
-	boss_locomotion.update(delta)
-
 	move_and_slide()
 
 
 func _on_death() -> void:
 	velocity = Vector3.ZERO
-	boss_ai.stop()
-	boss_combat.stop()
+
+	if boss_ai:
+		boss_ai.stop()
 
 
 func _on_depleted() -> void:
