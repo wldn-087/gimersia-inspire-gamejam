@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://d02wgy78kn237"]
+
+[ext_resource type="Script" uid="uid://d13gweb1qy83u" path="res://scripts/attack_data.gd" id="1_e5qj0"]
+
+[resource]
+script = ExtResource("1_e5qj0")
+attack_name = &"ground_slam"
+animation_name = &"ground_slam"
+active_start_frame = 17
+active_end_frame = 19
+recovery_frame = 19
+damage = 30.0
+cooldown = 6.0
+metadata/_custom_type_script = "uid://d13gweb1qy83u"

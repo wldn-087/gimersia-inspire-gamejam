@@ -1,3 +1,4 @@
+
 extends RefCounted
 class_name BossAI
 
@@ -26,11 +27,16 @@ func update(delta: float) -> void:
 	combat.update(delta)
 	_update_target(delta)
 
-	if boss.target == null:
-		locomotion.stop()
-		boss.play_boss_animation("idle")
+	# Jangan ganggu velocity saat charge atau slide.
+	if combat.is_charge_running or combat.is_sliding:
 		return
 
+	if boss.target == null or not is_instance_valid(boss.target):
+		locomotion.stop()
+		boss.play_boss_animation(&"idle")
+		return
+
+	# Serangan biasa dan charge preparation menghentikan locomotion.
 	if combat.is_attacking:
 		locomotion.stop()
 		return
@@ -46,26 +52,36 @@ func update(delta: float) -> void:
 
 func _update_target(delta: float) -> void:
 	target_timer -= delta
+
 	if target_timer > 0.0:
 		return
+
 	target_timer = TARGET_UPDATE_INTERVAL
 
-	var player: Player = boss._find_player(boss.get_tree().current_scene)
+	if boss.target != null and not is_instance_valid(boss.target):
+		boss.target = null
 
+	var player: Player = boss._find_player(
+		boss.get_tree().current_scene
+	)
+
+	# Player sedang menjadi target.
 	if boss.target is Player:
-		if not is_instance_valid(boss.target):
-			boss.target = _find_nearest_plant()
-		elif player == null:
+		if player == null:
 			boss.target = _find_nearest_plant()
 		elif _flat_distance_to(player) > PLAYER_LEASH_RANGE:
 			boss.target = _find_nearest_plant()
+
 		return
 
-	if player != null and _flat_distance_to(player) <= PLAYER_AGGRO_RANGE:
-		boss.target = player
-		return
+	# Player masuk radius aggro.
+	if player != null:
+		if _flat_distance_to(player) <= PLAYER_AGGRO_RANGE:
+			boss.target = player
+			return
 
-	if boss.target == null or not is_instance_valid(boss.target):
+	# Tidak ada target, cari tanaman.
+	if boss.target == null:
 		boss.target = _find_nearest_plant()
 
 
@@ -74,13 +90,15 @@ func _find_nearest_plant() -> Node3D:
 	var nearest_distance := INF
 
 	for node in boss.get_tree().get_nodes_in_group("saveable_plants"):
-		if not (node is Node3D):
+		if not node is Node3D:
 			continue
 
-		var distance := _flat_distance_to(node)
+		var plant := node as Node3D
+		var distance := _flat_distance_to(plant)
+
 		if distance < nearest_distance:
 			nearest_distance = distance
-			nearest = node
+			nearest = plant
 
 	return nearest
 
@@ -88,6 +106,7 @@ func _find_nearest_plant() -> Node3D:
 func _flat_distance_to(node: Node3D) -> float:
 	var offset := node.global_position - boss.global_position
 	offset.y = 0.0
+
 	return offset.length()
 
 

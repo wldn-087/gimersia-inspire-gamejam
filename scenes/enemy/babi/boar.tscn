@@ -119,6 +119,8 @@
 [ext_resource type="Texture2D" uid="uid://dcmxnd8nckiot" path="res://assets/sprites/boar_tusk_swing/0016.png" id="96_fn2jm"]
 [ext_resource type="Texture2D" uid="uid://db5fjp1u4fq5" path="res://assets/sprites/boar_tusk_swing/0017.png" id="97_ip6y7"]
 [ext_resource type="Texture2D" uid="uid://dyeq5j0eusedx" path="res://assets/sprites/boar_tusk_swing/0018.png" id="98_6qvj3"]
+[ext_resource type="Script" uid="uid://kd4v57jeq8mh" path="res://scenes/enemy/babi/components/boss_combat.gd" id="121_hcihy"]
+[ext_resource type="Script" uid="uid://co7ctoiu6q61j" path="res://scenes/enemy/babi/components/boss_attack_hit_box.gd" id="125_6hhvl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj04i"]
 radius = 0.6015625
@@ -438,6 +440,53 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("31_50ujb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_3wxwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_25ir7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_6nkd2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_r5va3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_kvh05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_6ui4k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_1exta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_mhn8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_en13e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_flokr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_5lv4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_4vjbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_e0y7y")
+}],
+"loop": 1,
+"name": &"run_attack",
+"speed": 32.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("45_6keol")
 }, {
 "duration": 1.0,
@@ -569,8 +618,14 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_uj04i"]
+radius = 1.30568
+
 [node name="Boar" type="CharacterBody3D" unique_id=555301906]
 script = ExtResource("1_sdfmn")
+max_health = 100.0
+move_speed = 4.0
+stop_distance = 4.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1646786783]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.060371518, 0.4142908, 0)
@@ -583,11 +638,23 @@ transform = Transform3D(0.3938831, 0, 0, 0, 0.3938831, 0, 0, 0, 0.3938831, 0, 1.
 shaded = true
 double_sided = false
 sprite_frames = SubResource("SpriteFrames_uj04i")
-animation = &"walk"
+animation = &"tusk_swing"
 autoplay = "idle"
 
 [node name="Shadow" type="Sprite3D" parent="Visual" unique_id=178339399]
-transform = Transform3D(0.96762913, 0, 0, 0, -1.6769706e-08, -0.96762913, 0, 0.38364613, -4.229641e-08, 0, 0.0025904179, 0)
+transform = Transform3D(0.96762913, 0, 0, 0, -1.6769706e-08, 0.96762913, 0, -0.38364613, -4.2296413e-08, 0, 0.0025904179, 0)
+double_sided = false
 texture = ExtResource("65_m5vom")
 
 [node name="Components" type="Node" parent="." unique_id=574847725]
+
+[node name="BossCombat" type="Node" parent="Components" unique_id=1314234278]
+script = ExtResource("121_hcihy")
+metadata/_custom_type_script = "uid://kd4v57jeq8mh"
+
+[node name="AttackHitBox" type="Area3D" parent="." unique_id=2089478241]
+script = ExtResource("125_6hhvl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitBox" unique_id=1737625835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.67668396, 1.2988825, 0)
+shape = SubResource("SphereShape3D_uj04i")

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://ba870hqcr467a"]
+
+[ext_resource type="Script" uid="uid://d13gweb1qy83u" path="res://scripts/attack_data.gd" id="1_i5glf"]
+
+[resource]
+script = ExtResource("1_i5glf")
+attack_name = &"tusk_swing"
+animation_name = &"tusk_swing"
+active_start_frame = 5
+active_end_frame = 8
+damage = 20.0
+cooldown = 3.0
+metadata/_custom_type_script = "uid://d13gweb1qy83u"
