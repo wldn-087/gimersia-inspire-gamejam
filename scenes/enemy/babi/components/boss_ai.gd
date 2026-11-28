@@ -74,7 +74,7 @@ func _find_nearest_plant() -> Node3D:
 	var nearest_distance := INF
 
 	for node in boss.get_tree().get_nodes_in_group("saveable_plants"):
-		if not node is Node3D:
+		if not (node is Node3D):
 			continue
 
 		var distance := _flat_distance_to(node)
