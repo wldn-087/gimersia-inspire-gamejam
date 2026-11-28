@@ -5,7 +5,7 @@ class_name AttackData
 @export var animation_name: StringName
 
 @export_group("Range")
-@export var range: float = 2.5
+@export var attack_range: float = 2.5
 
 @export_group("Timing")
 @export var active_start_frame: int = 2
