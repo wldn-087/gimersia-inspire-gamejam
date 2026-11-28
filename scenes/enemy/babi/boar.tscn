@@ -120,8 +120,8 @@
 [ext_resource type="Texture2D" uid="uid://dyeq5j0eusedx" path="res://assets/sprites/boar_tusk_swing/0018.png" id="98_6qvj3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uj04i"]
-radius = 1.109375
-height = 3.8836913
+radius = 0.6015625
+height = 3.4510772
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uj04i"]
 animations = [{
@@ -571,17 +571,19 @@ animations = [{
 [node name="Boar" type="CharacterBody3D" unique_id=555301906]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1646786783]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.047412157, 1.0699134, 0)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.060371518, 0.4142908, 0)
 shape = SubResource("CapsuleShape3D_uj04i")
 
 [node name="Visual" type="Node3D" parent="." unique_id=730880341]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="Visual" unique_id=216527875]
-transform = Transform3D(0.43211728, 0, 0, 0, 0.43211728, 0, 0, 0, 0.43211728, 0, 1.2366806, 0)
+transform = Transform3D(0.3938831, 0, 0, 0, 0.3938831, 0, 0, 0, 0.3938831, 0, 1.3497385, 0)
+shaded = true
+double_sided = false
 sprite_frames = SubResource("SpriteFrames_uj04i")
 animation = &"walk"
 autoplay = "idle"
 
 [node name="Shadow" type="Sprite3D" parent="Visual" unique_id=178339399]
-transform = Transform3D(1, 0, 0, 0, -1.7330716e-08, -1, 0, 0.39648056, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(0.96762913, 0, 0, 0, -1.6769706e-08, -0.96762913, 0, 0.38364613, -4.229641e-08, 0, 0.0025904179, 0)
 texture = ExtResource("65_m5vom")

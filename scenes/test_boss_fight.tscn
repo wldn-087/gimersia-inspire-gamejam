@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://8b6wsvrvi577" path="res://assets/model-3d/tree3.glb" id="4_nniyg"]
 [ext_resource type="PackedScene" uid="uid://vkp4vo6yfyo1" path="res://assets/model-3d/bush.glb" id="5_vy6t5"]
 [ext_resource type="PackedScene" uid="uid://b2tjbj1k54e" path="res://assets/model-3d/ground_back.glb" id="6_p6r05"]
+[ext_resource type="PackedScene" uid="uid://bv83lt880w4ui" path="res://scenes/enemy/babi/boar.tscn" id="7_cr21g"]
+[ext_resource type="PackedScene" uid="uid://dr831lsjk88ta" path="res://scenes/player/player.tscn" id="8_nniyg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw8ke"]
 albedo_texture = ExtResource("1_vuxie")
@@ -13,6 +15,22 @@ metallic = 0.05
 roughness = 0.71
 uv1_offset = Vector3(0.5, 0, 0.5)
 uv1_triplanar_sharpness = 1.1095704
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cr21g"]
+sky_top_color = Color(0.31124508, 0.6307091, 0.7595706, 1)
+sky_horizon_color = Color(0.7269888, 1.0443118, 1.1999997, 1)
+ground_bottom_color = Color(0.59273016, 0.8108155, 0.88785833, 1)
+ground_horizon_color = Color(0.65863776, 1.0240322, 1.1999996, 1)
+
+[sub_resource type="Sky" id="Sky_k0juu"]
+sky_material = SubResource("ProceduralSkyMaterial_cr21g")
+
+[sub_resource type="Environment" id="Environment_nniyg"]
+background_mode = 2
+background_color = Color(0.41762805, 0.5493688, 0.9999928, 1)
+background_energy_multiplier = 0.5
+sky = SubResource("Sky_k0juu")
+glow_enabled = true
 
 [node name="Test Boss Fight" type="Node3D" unique_id=1595413626]
 
@@ -1039,3 +1057,17 @@ transform = Transform3D(1.1262158, 0, 0, 0, 1.1262158, 0, 0, 0, 1.1262158, -2.13
 transform = Transform3D(1.0096283, 0, 0, 0, 1.0096283, 0, 0, 0, 1.0096283, 2.2446055, 0, -0.026687622)
 
 [node name="ground_back" parent="." unique_id=483204624 instance=ExtResource("6_p6r05")]
+
+[node name="Boar" parent="." unique_id=555301906 instance=ExtResource("7_cr21g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.95516, 0, 0)
+
+[node name="Player" parent="." unique_id=393122508 instance=ExtResource("8_nniyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9917703, 0.3389181, 2.8145561)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1262584496]
+environment = SubResource("Environment_nniyg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2135438010]
+transform = Transform3D(-0.8920127, -0.09156408, 0.44263935, 0.42327762, -0.5127828, 0.74692065, 0.15858674, 0.8536218, 0.49616572, 0, 6.0864086, -0.8943491)
+light_color = Color(0.95105034, 0.9216165, 0.82684344, 1)
+shadow_enabled = true

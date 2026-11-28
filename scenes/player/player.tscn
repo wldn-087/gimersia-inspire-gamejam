@@ -384,4 +384,7 @@ collision_mask = 2
 shape = SubResource("SphereShape3D_uj04i")
 disabled = true
 
+[node name="Camera3D" type="Camera3D" parent="." unique_id=276358562]
+transform = Transform3D(1, 0, 0, 0, 0.7901846, 0.61286885, 0, -0.61286885, 0.7901846, 0, 3.8383412, 4.2724223)
+
 [connection signal="animation_finished" from="Visual/AnimatedSprite3D" to="Components/AnimationHandler" method="_on_animated_sprite_3d_animation_finished"]

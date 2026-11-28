@@ -24,14 +24,14 @@ sky_horizon_color = Color(0.7269888, 1.0443118, 1.1999997, 1)
 ground_bottom_color = Color(0.59273016, 0.8108155, 0.88785833, 1)
 ground_horizon_color = Color(0.65863776, 1.0240322, 1.1999996, 1)
 
-[sub_resource type="Sky" id="Sky_k0juu"]
+[sub_resource type="Sky" id="Sky_mp73e"]
 sky_material = SubResource("ProceduralSkyMaterial_4wyf3")
 
 [sub_resource type="Environment" id="Environment_71j4m"]
 background_mode = 2
 background_color = Color(0.41762805, 0.5493688, 0.9999928, 1)
 background_energy_multiplier = 0.5
-sky = SubResource("Sky_k0juu")
+sky = SubResource("Sky_mp73e")
 glow_enabled = true
 
 [node name="World" type="Node3D" unique_id=1304762140]
@@ -50,9 +50,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08649731, -0.025561213, -0.
 
 [node name="Player" parent="." unique_id=393122508 instance=ExtResource("2_yntwj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.79452467, 0, 4.220794)
-
-[node name="Camera3D" type="Camera3D" parent="Player" unique_id=1808341274]
-transform = Transform3D(1, 0, 0, 0, 0.7901846, 0.61286885, 0, -0.61286885, 0.7901846, 0, 3.8383412, 4.2724223)
 
 [node name="EnemySpawner" type="Node3D" parent="." unique_id=864967689 node_paths=PackedStringArray("spawn_points", "container")]
 script = ExtResource("9_0wgkg")
