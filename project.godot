@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gimersia Inspire GameJam"
-run/main_scene="uid://b6pkl5uti2shb"
+run/main_scene="uid://cy8jdn648v0wh"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
