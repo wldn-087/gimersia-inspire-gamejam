@@ -18,6 +18,8 @@ signal enemy_count_changed(count: int)
 @export var auto_start: bool = false
 @export var container: Node
 
+var current_config: DayConfig
+
 var _timer: Timer
 var _alive_count: int = 0
 
@@ -48,23 +50,46 @@ func stop() -> void:
 func apply_day_config(config: DayConfig) -> void:
 	if config == null:
 		return
+		
+	current_config = config
 
 	var speed := maxf(config.spawn_rate_speed, 0.01)
 	_timer.wait_time = maxf(config.spawn_rate / speed, 0.1)
 
+func pick_enemy_scene() -> PackedScene:
+	if enemy_scenes.size() < 2:
+		push_warning("EnemySpawner: Dibutuhkan scene ulat dan tikus.")
+		return null
+
+	if current_config == null:
+		return null
+
+	var worm_weight = maxf(current_config.worm_spawn_weight, 0.0)
+	var rat_weight = maxf(current_config.rat_spawn_weight, 0.0)
+
+	var total_weight = worm_weight + rat_weight
+
+	if total_weight <= 0.0:
+		return null
+
+	var random_weight = randf() * total_weight
+
+	if random_weight < worm_weight:
+		return enemy_scenes[0]
+
+	return enemy_scenes[1]
 
 func spawn_one() -> void:
 	if _alive_count >= max_total:
 		return
 
-	if enemy_scenes.is_empty() or spawn_points.is_empty():
+	if enemy_scenes.size() < 2 or spawn_points.is_empty():
 		return
 
-	var valid_scenes: Array[PackedScene] = []
-
-	for scene in enemy_scenes:
-		if scene != null:
-			valid_scenes.append(scene)
+	var selected_scene := pick_enemy_scene()
+		
+	if selected_scene == null:
+		return
 
 	var valid_points: Array[Node3D] = []
 
@@ -72,12 +97,10 @@ func spawn_one() -> void:
 		if is_instance_valid(point):
 			valid_points.append(point)
 
-	if valid_scenes.is_empty() or valid_points.is_empty():
+	if valid_points.is_empty():
 		return
 
-	var selected_scene: PackedScene = valid_scenes.pick_random()
 	var selected_point: Node3D = valid_points.pick_random()
-
 	var enemy := selected_scene.instantiate() as Enemy
 
 	if enemy == null:
@@ -96,16 +119,13 @@ func spawn_one() -> void:
 	var parent_node := container if container != null else get_parent()
 
 	parent_node.add_child(enemy)
-	print("enemy spawned")
 	enemy.global_position = selected_point.global_position + offset
 
 	_alive_count += 1
-
 	enemy.tree_exiting.connect(_on_enemy_removed, CONNECT_ONE_SHOT)
 
 	enemy_spawned.emit(enemy)
 	enemy_count_changed.emit(_alive_count)
-
 
 func _on_enemy_removed() -> void:
 	_alive_count = maxi(_alive_count - 1, 0)

@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://b2p8315iwxcow"]
 
 [ext_resource type="Script" uid="uid://bhnbe57ppoh5y" path="res://scripts/lahan.gd" id="1_28i0b"]
+[ext_resource type="Texture2D" uid="uid://d15xmgpxiosgj" path="res://assets/textures/Jagung Green.png" id="2_ctfte"]
 [ext_resource type="Script" uid="uid://dxbgm3kuoruf" path="res://scripts/health_component.gd" id="2_ddlwm"]
 [ext_resource type="PackedScene" uid="uid://dr5qr62sccuhe" path="res://assets/model-3d/lahan.glb" id="3_d5g51"]
+[ext_resource type="Texture2D" uid="uid://61oiob8un00a" path="res://assets/textures/Jagung.png" id="3_fp04d"]
 [ext_resource type="PackedScene" uid="uid://dam12mqcfld5u" path="res://assets/model-3d/tanaman.glb" id="4_5x88x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uj04i"]
@@ -10,6 +12,7 @@ size = Vector3(5, 0.10333252, 4)
 
 [node name="Lahan" type="Area3D" unique_id=1746492850]
 script = ExtResource("1_28i0b")
+growth_textures = Array[Texture2D]([ExtResource("2_ctfte"), ExtResource("3_fp04d")])
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1383019805]
 script = ExtResource("2_ddlwm")

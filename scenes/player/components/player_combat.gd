@@ -70,4 +70,4 @@ func _on_action_finished() -> void:
 	finish_attack()
 
 func _on_enemy_detect(enemy: Enemy):
-	enemy.take_damage(melee_attack.damage)
+	enemy.take_damage(melee_attack.damage * player._damage)

@@ -26,14 +26,18 @@ var current_config: DayConfig
 # Menandakan timer Combat sudah selesai.
 var _combat_timer_finished: bool = false
 
-
 func _ready() -> void:
+	add_to_group("day_cycle_manager")
+	
 	if phase_timer == null or enemy_spawner == null:
 		push_error("DayCycleManager: Referensi belum lengkap.")
 		return
 
 	phase_timer.phase_finished.connect(_on_phase_finished)
 	enemy_spawner.enemy_count_changed.connect(_on_enemy_count_changed)
+
+	if SaveManager.has_pending_save():
+		return
 
 	start_day(starting_day)
 
@@ -49,7 +53,8 @@ func start_day(day: int) -> void:
 	current_config = config
 
 	day_changed.emit(current_day)
-
+	update_plant_growth(current_config)
+	
 	if current_config.preparation_duration > 0.0:
 		_start_preparation()
 	else:
@@ -62,6 +67,13 @@ func _find_day_config(day: int) -> DayConfig:
 			return config
 
 	return null
+
+func update_plant_growth(config: DayConfig) -> void:
+	if config == null: return
+
+	for lahan in get_tree().get_nodes_in_group("saveable_plants"):
+		if is_instance_valid(lahan) and lahan.has_method("apply_growth_stage"):
+			lahan.apply_growth_stage(config.plant_growth_stage)
 
 
 func _start_preparation() -> void:
@@ -137,4 +149,13 @@ func request_rest() -> void:
 	if current_phase != Phase.RESTING:
 		return
 
-	start_day(current_day + 1)
+	if current_day >= 10:
+		return
+		
+	var next_day = current_day + 1
+	
+	if not SaveManager.save_next_day(next_day):
+		push_error("Gagal menyimpan progress.")
+		return
+
+	start_day(next_day)
