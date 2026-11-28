@@ -32,18 +32,6 @@ func _physics_process(delta: float) -> void:
 	player_combat.update_hitbox_position()
 	move_and_slide()
 
-func apply_knockback(source_position: Vector3, strength: float) -> void:
-	var direction := global_position - source_position
-	direction.y = 0.0
-
-	if direction.length_squared() < 0.001:
-		direction = Vector3.RIGHT
-	else:
-		direction = direction.normalized()
-
-	velocity.x = direction.x * strength
-	velocity.z = direction.z * strength
-
 func get_save_data() -> Dictionary:
 	return {
 		"health": health_component.current_health,

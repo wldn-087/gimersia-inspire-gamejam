@@ -22,11 +22,15 @@ var ground_slam_base_x: float
 
 var white_material: ShaderMaterial
 
+signal health_changed(current_health: float, max_health: float)
 
 func _on_ready() -> void:
 	max_health = 750.0
 	reset_health()
-
+	_health.health_changed.connect(func(current: float, maximum: float):
+		health_changed.emit(current, maximum)
+	)
+	
 	target = null
 
 	tusk_base_x = absf(tusk_hitbox.hitbox_shape.position.x)

@@ -132,7 +132,7 @@ height = 2.2905037
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ca3yt"]
 render_priority = 0
 shader = ExtResource("5_lvjqe")
-shader_parameter/white_override = false
+shader_parameter/white_amount = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uj04i"]
 animations = [{

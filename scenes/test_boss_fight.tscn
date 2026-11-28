@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bv83lt880w4ui" path="res://scenes/enemy/babi/boar.tscn" id="7_cr21g"]
 [ext_resource type="PackedScene" uid="uid://dr831lsjk88ta" path="res://scenes/player/player.tscn" id="8_nniyg"]
 [ext_resource type="PackedScene" uid="uid://b2p8315iwxcow" path="res://scenes/lahan.tscn" id="9_nniyg"]
+[ext_resource type="PackedScene" uid="uid://cxhwjogpsuuay" path="res://scenes/ui/boss_health_bar.tscn" id="10_vy6t5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw8ke"]
 albedo_texture = ExtResource("1_vuxie")
@@ -1078,3 +1079,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -7)
 
 [node name="Lahan2" parent="." unique_id=337292389 instance=ExtResource("9_nniyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87001514, 0, -12.661766)
+
+[node name="BossHealthBar" parent="." unique_id=874725442 node_paths=PackedStringArray("boss") instance=ExtResource("10_vy6t5")]
+boss = NodePath("../Boar")

@@ -1,8 +1,8 @@
 extends RefCounted
 class_name EnemyHealth
-## Komponen darah musuh. Tidak tahu apa-apa soal gerak/animasi.
 
 signal depleted
+signal health_changed(current: float, max: float)
 
 var max_health: float
 var current: float
@@ -17,12 +17,16 @@ func _init(p_max_health: float) -> void:
 func reset(p_max_health: float) -> void:
 	max_health = p_max_health
 	current = p_max_health
+	health_changed.emit(current, max_health)
 
 
 func take_damage(amount: float) -> void:
 	if is_dead:
 		return
-	current -= amount
+
+	current = maxf(current - amount, 0.0)
+	health_changed.emit(current, max_health)
+
 	if current <= 0.0:
 		kill()
 
@@ -30,5 +34,6 @@ func take_damage(amount: float) -> void:
 func kill() -> void:
 	if is_dead:
 		return
+
 	is_dead = true
 	depleted.emit()

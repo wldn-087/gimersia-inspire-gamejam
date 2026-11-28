@@ -69,5 +69,14 @@ func _on_action_finished() -> void:
 	deactivate_hitbox()
 	finish_attack()
 
-func _on_enemy_detect(enemy: Enemy):
-	enemy.take_damage(melee_attack.damage * player._damage)
+func _on_enemy_detect(body: Node3D) -> void:
+	if not body.is_in_group("enemy"):
+		return
+
+	if not body.has_method("take_damage"):
+		return
+
+	body.call(
+		"take_damage",
+		melee_attack.damage * player._damage
+	)

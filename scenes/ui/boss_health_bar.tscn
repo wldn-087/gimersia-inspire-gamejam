@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cxhwjogpsuuay"]
+
+[ext_resource type="Texture2D" uid="uid://dy46o1lxca8tg" path="res://assets/textures/grass ground texture.jpg" id="1_70265"]
+[ext_resource type="Script" uid="uid://b3kqnnmienbrm" path="res://scenes/enemy/babi/components/boss_health_bar.gd" id="1_p4u1e"]
+
+[node name="BossHealthBar" type="CanvasLayer" unique_id=874725442]
+script = ExtResource("1_p4u1e")
+
+[node name="Label" type="Label" parent="." unique_id=1461756908]
+offset_left = 401.0
+offset_top = 549.0
+offset_right = 754.0
+offset_bottom = 572.0
+text = "BABI HUTAN"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2085798564]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -368.0
+offset_top = -64.0
+offset_right = 368.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 100.0
+rounded = true
+nine_patch_stretch = true
+texture_under = ExtResource("1_70265")
+texture_progress = ExtResource("1_70265")
+tint_under = Color(0.16206557, 0.1620656, 0.16206557, 0.63529414)
+tint_over = Color(1, 0.08625846, 0.38107735, 1)
+tint_progress = Color(1, 0, 0, 1)

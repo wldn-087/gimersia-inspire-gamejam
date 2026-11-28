@@ -19,6 +19,8 @@ var dash_timer := 0.0
 var dash_cooldown_timer := 0.0
 var dash_remaining_distance := 0.0
 
+var knockback_velocity := Vector3.ZERO
+@export var knockback_deceleration := 25.0
 
 func start(owner: Player):
 	player = owner
@@ -35,6 +37,15 @@ func gravity(delta: float):
 
 func move(delta: float):
 	gravity(delta)
+	
+	if knockback_velocity.length_squared() > 0.01:
+		player.velocity.x = knockback_velocity.x
+		player.velocity.z = knockback_velocity.z
+		knockback_velocity = knockback_velocity.move_toward(
+			Vector3.ZERO,
+			knockback_deceleration * delta
+		)
+		return
 
 	if anim_player.on_action:
 		is_dashing = false
@@ -126,3 +137,14 @@ func update_dash(delta: float) -> bool:
 		player.velocity.z = 0.0
 
 	return true
+
+func apply_knockback(source_position: Vector3, strength: float) -> void:
+	var direction := player.global_position - source_position
+	direction.y = 0.0
+
+	if direction.length_squared() < 0.001:
+		direction = Vector3.RIGHT
+	else:
+		direction = direction.normalized()
+
+	knockback_velocity = direction * strength

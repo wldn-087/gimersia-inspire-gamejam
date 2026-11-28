@@ -68,7 +68,7 @@ func apply_damage(target: Node) -> void:
 	health.take_damage(current_attack.damage)
 
 	if target is Player:
-		target.apply_knockback(global_position, current_attack.knockback)
+		target.player_locomotion.apply_knockback(global_position, current_attack.knockback)
 
 	print(
 		"[Boss] Hit: ",
