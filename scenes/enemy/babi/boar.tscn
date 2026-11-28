@@ -631,6 +631,7 @@ radius = 2.9487305
 height = 3.7460938
 
 [node name="Boar" type="CharacterBody3D" unique_id=555301906]
+collision_layer = 2
 script = ExtResource("1_sdfmn")
 attacks = Array[Object]([ExtResource("3_6hhvl"), ExtResource("2_lvjqe"), ExtResource("4_v70ij")])
 max_health = 100.0
@@ -663,6 +664,8 @@ texture = ExtResource("65_m5vom")
 [node name="AttackHitBoxes" type="Node3D" parent="." unique_id=1977962816]
 
 [node name="TuskHitbox" type="Area3D" parent="AttackHitBoxes" unique_id=2089478241]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("125_6hhvl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitBoxes/TuskHitbox" unique_id=1737625835]
@@ -671,6 +674,7 @@ shape = SubResource("SphereShape3D_uj04i")
 disabled = true
 
 [node name="GroundSlamHitBox" type="Area3D" parent="AttackHitBoxes" unique_id=1788333818]
+collision_layer = 8
 script = ExtResource("125_6hhvl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitBoxes/GroundSlamHitBox" unique_id=1570424173]
@@ -679,6 +683,7 @@ shape = SubResource("CylinderShape3D_uj04i")
 disabled = true
 
 [node name="ChargeHitbox" type="Area3D" parent="AttackHitBoxes" unique_id=770299742]
+collision_layer = 8
 script = ExtResource("125_6hhvl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackHitBoxes/ChargeHitbox" unique_id=652426726]

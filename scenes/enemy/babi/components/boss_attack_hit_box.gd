@@ -57,6 +57,8 @@ func apply_damage(target: Node) -> void:
 
 	if target is Player:
 		health = target.health_component
+		target.apply_knockback(global_position, 10)
+		
 	elif target is Lahan:
 		health = target.health_component
 

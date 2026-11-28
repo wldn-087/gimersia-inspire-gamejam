@@ -339,8 +339,10 @@ transform = Transform3D(0.29906875, 0, 0, 0, 0.29906875, 0, 0, 0, 0.29906875, 0,
 shaded = true
 double_sided = false
 sprite_frames = SubResource("SpriteFrames_uj04i")
-animation = &"idle"
+animation = &"hurt"
 autoplay = "idle"
+frame = 7
+frame_progress = 1.0
 
 [node name="Shadow" type="Sprite3D" parent="Visual" unique_id=717083528]
 transform = Transform3D(0.26415685, 0, 0, 0, -6.1930723e-09, 0.26415685, 0, -0.14168097, -1.1546663e-08, 0, 0.017, 0)

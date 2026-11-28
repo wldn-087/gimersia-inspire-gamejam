@@ -2,6 +2,7 @@ extends Node
 class_name HealthComponent
 
 signal health_changed(current_health: float, max_health: float)
+signal hurt
 signal died
 
 const DEFAULT_MAX_HEALTH: float = 100.0
@@ -19,7 +20,7 @@ func take_damage(amount: float) -> void:
 
 	current_health = maxf(current_health - final_damage, 0.0)
 	health_changed.emit(current_health, max_health)
-
+	hurt.emit()
 	if current_health <= 0.0:
 		died.emit()
 

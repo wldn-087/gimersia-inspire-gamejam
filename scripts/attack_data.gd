@@ -15,6 +15,7 @@ class_name AttackData
 @export_group("Damage")
 @export var damage: float = 10.0
 @export var cooldown: float = 0.8
+@export var knockback: float = 5.0
 
 @export_group("Hitbox")
 @export var hitbox_name: StringName
