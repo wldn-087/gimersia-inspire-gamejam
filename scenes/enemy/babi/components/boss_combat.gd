@@ -28,7 +28,7 @@ func try_attack(distance: float) -> bool:
 	for attack in attacks:
 		var cooldown_left := float(cooldowns.get(attack.attack_name, 0.0))
 
-		if cooldown_left <= 0.0 and distance <= attack.range:
+		if cooldown_left <= 0.0 and distance <= attack.attack_range:
 			available_attacks.append(attack)
 
 	if available_attacks.is_empty():
@@ -47,15 +47,19 @@ func start_attack(attack: AttackData) -> void:
 
 	super.start_attack(attack)
 
-	if boss.boss_sprite.sprite_frames.has_animation(attack.animation_name):
-		await boss.boss_sprite.animation_finished
+	if not boss.boss_sprite.sprite_frames.has_animation(attack.animation_name):
+		finish_attack()
+		return
+
+	await boss.boss_sprite.animation_finished
 
 	if is_instance_valid(boss) and is_attacking:
 		finish_attack()
 
 
 func play_attack_animation(animation_name: StringName) -> void:
-	boss.play_boss_animation(animation_name)
+	if boss.boss_sprite.sprite_frames.has_animation(animation_name):
+		boss.boss_sprite.play(animation_name)
 	print("[Boss] Attack triggered: ", animation_name)
 
 
@@ -67,7 +71,7 @@ func _create_attacks() -> void:
 	var tusk_swing := AttackData.new()
 	tusk_swing.attack_name = &"tusk_swing"
 	tusk_swing.animation_name = &"tusk_swing"
-	tusk_swing.range = 2.5
+	tusk_swing.attack_range = 2.5
 	tusk_swing.damage = 20.0
 	tusk_swing.cooldown = 3.0
 	attacks.append(tusk_swing)
@@ -75,7 +79,7 @@ func _create_attacks() -> void:
 	var ground_slam := AttackData.new()
 	ground_slam.attack_name = &"ground_slam"
 	ground_slam.animation_name = &"ground_slam"
-	ground_slam.range = 4.0
+	ground_slam.attack_range = 4.0
 	ground_slam.damage = 30.0
 	ground_slam.cooldown = 6.0
 	attacks.append(ground_slam)
