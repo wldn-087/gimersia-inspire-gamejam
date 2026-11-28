@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://cbaskf4km8c5p"]
 
 [ext_resource type="Texture2D" uid="uid://dhjjj8vlnidub" path="res://assets/ui/main_menu/title.png" id="1_m1kxf"]
+[ext_resource type="Script" uid="uid://ding6i6gui3uo" path="res://scripts/ui/main_menu.gd" id="1_uhagc"]
+[ext_resource type="Texture2D" uid="uid://cevbncdoxrp7w" path="res://assets/ui/main_menu/bg_main_menu.jpeg" id="1_x2yvf"]
 [ext_resource type="Texture2D" uid="uid://dm3clriegt6ic" path="res://assets/ui/main_menu/new_game.png" id="2_x2yvf"]
 [ext_resource type="Texture2D" uid="uid://bnfu81k5eb07a" path="res://assets/ui/main_menu/continue.png" id="3_uhagc"]
 [ext_resource type="Texture2D" uid="uid://5xhc86gq7box" path="res://assets/ui/main_menu/quit_game.png" id="4_btxxm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki444"]
+atlas = ExtResource("1_x2yvf")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dn7o2"]
 atlas = ExtResource("1_m1kxf")
@@ -28,35 +33,57 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_uhagc")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1323350809]
+modulate = Color(0.6901961, 0.6901961, 0.6901961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ki444")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=2030187715]
 layout_mode = 0
-offset_left = 49.0
-offset_top = 276.0
-offset_right = 1969.0
-offset_bottom = 710.0
+offset_left = 94.0
+offset_top = 225.0
+offset_right = 2014.0
+offset_bottom = 659.0
+scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_dn7o2")
 
 [node name="NewGameButton" type="TextureButton" parent="." unique_id=926579527]
 layout_mode = 0
-offset_left = 342.0
-offset_top = 762.0
-offset_right = 1587.0
-offset_bottom = 942.0
+offset_left = 251.0
+offset_top = 630.0
+offset_right = 1496.0
+offset_bottom = 810.0
+scale = Vector2(0.5, 0.5)
 texture_normal = SubResource("AtlasTexture_oahka")
 
 [node name="ContinueButton" type="TextureButton" parent="." unique_id=650080715]
 layout_mode = 0
-offset_left = 323.0
-offset_top = 964.0
-offset_right = 1603.0
-offset_bottom = 1174.0
+offset_left = 249.0
+offset_top = 494.0
+offset_right = 1529.0
+offset_bottom = 704.0
+scale = Vector2(0.5, 0.5)
 texture_normal = SubResource("AtlasTexture_smxvn")
 
 [node name="QuitButton" type="TextureButton" parent="." unique_id=1082426624]
 layout_mode = 0
-offset_left = 325.0
-offset_top = 1219.0
-offset_right = 1605.0
-offset_bottom = 1414.0
+offset_left = 241.0
+offset_top = 754.0
+offset_right = 1521.0
+offset_bottom = 949.0
+scale = Vector2(0.5, 0.5)
 texture_normal = SubResource("AtlasTexture_foswx")
+
+[connection signal="pressed" from="NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
