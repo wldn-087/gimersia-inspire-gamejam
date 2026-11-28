@@ -2,6 +2,8 @@
 extends Enemy
 class_name BoarBoss
 
+const WHITE_FLASH_SHADER = preload("res://assets/shader/white_flash.gdshader")
+
 @export_group("Boss Attacks")
 @export var attacks: Array[AttackData] = []
 
@@ -18,6 +20,8 @@ var boss_combat: BossCombat
 var tusk_base_x: float
 var ground_slam_base_x: float
 
+var white_material: ShaderMaterial
+
 
 func _on_ready() -> void:
 	max_health = 750.0
@@ -27,6 +31,8 @@ func _on_ready() -> void:
 
 	tusk_base_x = absf(tusk_hitbox.hitbox_shape.position.x)
 	ground_slam_base_x = absf(ground_slam_hitbox.hitbox_shape.position.x)
+
+	setup_white_material()
 
 	boss_locomotion = BossLocomotion.new(self)
 
@@ -85,8 +91,8 @@ func get_attack_hitbox(hitbox_name: StringName) -> BossAttackHitbox:
 func _on_facing_changed(left: bool) -> void:
 	var direction := -1.0 if left else 1.0
 
-	tusk_hitbox.hitbox_shape.position.x = tusk_base_x * direction
-	ground_slam_hitbox.hitbox_shape.position.x = ground_slam_base_x * direction
+	tusk_hitbox.position.x = -1.16 if left else 1.16
+	ground_slam_hitbox.position.x = -0.5 if left else 0.5
 
 
 func _on_death() -> void:
@@ -109,3 +115,69 @@ func _on_depleted() -> void:
 		await boss_sprite.animation_finished
 
 	queue_free()
+
+
+# ========================================
+# WHITE FLASH
+# ========================================
+
+func setup_white_material() -> void:
+	white_material = ShaderMaterial.new()
+	white_material.shader = WHITE_FLASH_SHADER
+
+	boss_sprite.material_override = white_material
+
+	boss_sprite.frame_changed.connect(_update_sprite_texture)
+	boss_sprite.animation_changed.connect(_update_sprite_texture)
+
+	_update_sprite_texture()
+
+
+func _update_sprite_texture() -> void:
+	if white_material == null:
+		return
+
+	var texture = boss_sprite.sprite_frames.get_frame_texture(
+		boss_sprite.animation,
+		boss_sprite.frame
+	)
+
+	white_material.set_shader_parameter("sprite_texture", texture)
+
+
+func set_white_amount(amount: float) -> void:
+	if white_material == null:
+		return
+
+	white_material.set_shader_parameter(
+		"white_amount",
+		clampf(amount, 0.0, 1.0)
+	)
+
+
+func enable_white_override() -> void:
+	set_white_amount(1.0)
+
+
+func disable_white_override() -> void:
+	set_white_amount(0.0)
+
+
+func flash_white(duration: float = 0.12) -> void:
+	if white_material == null:
+		return
+
+	var tween := create_tween()
+
+	set_white_amount(1.0)
+
+	tween.tween_method(
+		set_white_amount,
+		1.0,
+		0.0,
+		duration
+	)
+
+func take_damage(amount: float) -> void:
+	flash_white()
+	super.take_damage(amount)

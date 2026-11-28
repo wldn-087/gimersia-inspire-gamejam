@@ -57,8 +57,7 @@ func apply_damage(target: Node) -> void:
 
 	if target is Player:
 		health = target.health_component
-		target.apply_knockback(global_position, 10)
-		
+
 	elif target is Lahan:
 		health = target.health_component
 
@@ -68,9 +67,14 @@ func apply_damage(target: Node) -> void:
 	hit_targets[target_id] = true
 	health.take_damage(current_attack.damage)
 
+	if target is Player:
+		target.apply_knockback(global_position, current_attack.knockback)
+
 	print(
 		"[Boss] Hit: ",
 		target.name,
 		" | Damage: ",
-		current_attack.damage
+		current_attack.damage,
+		" | Knockback: ",
+		current_attack.knockback
 	)
