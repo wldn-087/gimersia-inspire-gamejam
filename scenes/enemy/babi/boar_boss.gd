@@ -16,6 +16,7 @@ func _on_ready() -> void:
 	attack_range = 2.5
 	attack_cooldown = 5.0
 	reset_health()
+	target = null
 
 	boss_locomotion = BossLocomotion.new(self)
 
