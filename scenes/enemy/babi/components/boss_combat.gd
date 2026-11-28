@@ -7,19 +7,26 @@ const RUN_ATTACK_ANIMATION: StringName = &"run_attack"
 const SLIDE_ANIMATION: StringName = &"slide"
 
 const CHARGE_SPEED: float = 9.0
-const SLIDE_DECELERATION: float = 18.0
+const SLIDE_DECELERATION: float = 12.0
+const SLIDE_MIN_SPEED: float = 0.2
+
+const RUN_ATTACK_MAX_DURATION: float = 1.2
+const RUN_ATTACK_MAX_DISTANCE: float = 8.0
+
+var attack_cooldown_timer: float = 0.0
 
 var boss: BoarBoss
 var attacks: Array[AttackData] = []
-var cooldowns: Dictionary = {}
 
-var is_charge_running := false
-var is_sliding := false
+var is_charge_running: bool = false
+var is_sliding: bool = false
 
-var charge_direction := Vector3.ZERO
-var hitbox_active := false
+var charge_direction: Vector3 = Vector3.ZERO
+var charge_start_position: Vector3 = Vector3.ZERO
 
-var sequence_id := 0
+var active_hitbox: BossAttackHitbox
+
+var sequence_id: int = 0
 
 
 func _init(
@@ -40,13 +47,21 @@ func update(delta: float) -> void:
 	_update_charge_movement(delta)
 
 
+# ==================================================
+# COOLDOWN
+# ==================================================
+
 func _update_cooldowns(delta: float) -> void:
-	for attack_name in cooldowns.keys():
-		cooldowns[attack_name] = maxf(
-			float(cooldowns[attack_name]) - delta,
+	if attack_cooldown_timer > 0.0:
+		attack_cooldown_timer = maxf(
+			attack_cooldown_timer - delta,
 			0.0
 		)
 
+
+# ==================================================
+# MOVEMENT
+# ==================================================
 
 func _update_charge_movement(delta: float) -> void:
 	if is_charge_running:
@@ -54,51 +69,102 @@ func _update_charge_movement(delta: float) -> void:
 		boss.velocity.z = charge_direction.z * CHARGE_SPEED
 
 	elif is_sliding:
-		boss.velocity.x = move_toward(
+		var horizontal_velocity := Vector3(
 			boss.velocity.x,
 			0.0,
+			boss.velocity.z
+		)
+
+		horizontal_velocity = horizontal_velocity.move_toward(
+			Vector3.ZERO,
 			SLIDE_DECELERATION * delta
 		)
 
-		boss.velocity.z = move_toward(
-			boss.velocity.z,
-			0.0,
-			SLIDE_DECELERATION * delta
-		)
+		boss.velocity.x = horizontal_velocity.x
+		boss.velocity.z = horizontal_velocity.z
+
+		if horizontal_velocity.length() <= SLIDE_MIN_SPEED:
+			boss.velocity.x = 0.0
+			boss.velocity.z = 0.0
 
 
-func try_attack(distance: float) -> bool:
+func _stop_attack_movement() -> void:
+	boss.velocity.x = 0.0
+	boss.velocity.z = 0.0
+
+
+# ==================================================
+# ATTACK SELECTION
+# ==================================================
+
+func try_attack(_distance: float = 0.0) -> bool:
 	if is_attacking:
 		return false
 
+	if attack_cooldown_timer > 0.0:
+		return false
+
+	var selected_attack: AttackData = select_attack()
+
+	if selected_attack == null:
+		return false
+
+	start_attack(selected_attack)
+	return true
+
+
+func select_attack() -> AttackData:
+	if boss.target == null:
+		return null
+
+	if not is_instance_valid(boss.target):
+		return null
+
+	if attack_cooldown_timer > 0.0:
+		return null
+
 	var available_attacks: Array[AttackData] = []
 
-	for attack in attacks:
-		var cooldown_left := float(
-			cooldowns.get(attack.attack_name, 0.0)
-		)
+	var distance: float = boss.global_position.distance_to(
+		boss.target.global_position
+	)
 
-		if cooldown_left > 0.0:
+	for attack in attacks:
+		if attack == null:
 			continue
 
+		# Lahan hanya bisa diserang menggunakan Tusk Swing.
+		if boss.target is Lahan:
+			if attack.attack_name != &"tusk_swing":
+				continue
+
+		# Periksa jarak serangan.
 		if distance > attack.attack_range:
 			continue
 
 		available_attacks.append(attack)
 
 	if available_attacks.is_empty():
-		return false
+		return null
 
-	var selected_attack: AttackData = available_attacks.pick_random()
+	return available_attacks.pick_random()
 
-	cooldowns[selected_attack.attack_name] = selected_attack.cooldown
 
-	start_attack(selected_attack)
-	return true
-
+# ==================================================
+# ATTACK EXECUTION
+# ==================================================
 
 func start_attack(attack: AttackData) -> void:
 	if is_attacking or attack == null:
+		return
+
+	if attack_cooldown_timer > 0.0:
+		return
+
+	if boss.get_attack_hitbox(attack.hitbox_name) == null:
+		push_warning(
+			"[Boss] Invalid hitbox for attack: " + str(attack.attack_name)
+		)
 		return
 
 	current_attack = attack
@@ -110,71 +176,105 @@ func start_attack(attack: AttackData) -> void:
 	print("[Boss] Attack triggered: ", attack.attack_name)
 
 	if attack.attack_name == &"charge_attack":
-		await _execute_charge_attack(current_sequence)
+		await _execute_charge_attack(current_sequence, attack)
 	else:
 		await _execute_normal_attack(current_sequence, attack)
 
 
-func _execute_charge_attack(current_sequence: int) -> void:
-	# Phase 1: Charge preparation.
-	_set_hitbox_active(false)
-	boss.stop_horizontal_movement()
+# ==================================================
+# CHARGE ATTACK
+# ==================================================
 
+func _execute_charge_attack(
+	current_sequence: int,
+	attack: AttackData
+) -> void:
+	_deactivate_hitbox()
+	_stop_attack_movement()
+
+	# Phase 1: Charge preparation.
 	var finished := await _play_and_wait(CHARGE_ANIMATION)
 
+	if not _is_sequence_valid(current_sequence):
+		return
+
 	if not finished:
 		_finish_current_attack()
 		return
 
-	if not _is_sequence_valid(current_sequence):
-		return
-
-	# Lock direction before running.
+	# Tentukan arah charge.
 	charge_direction = _get_charge_direction()
+	charge_start_position = boss.global_position
 
-	# Phase 2: Run attack.
+	# Phase 2: Run Attack.
 	is_charge_running = true
-	_set_hitbox_active(true)
 
-	finished = await _play_and_wait(RUN_ATTACK_ANIMATION)
+	boss.play_boss_animation(RUN_ATTACK_ANIMATION)
+	_activate_hitbox(attack)
+
+	var elapsed: float = 0.0
+
+	while (
+		elapsed < RUN_ATTACK_MAX_DURATION
+		and _get_charge_distance() < RUN_ATTACK_MAX_DISTANCE
+	):
+		if not _is_sequence_valid(current_sequence):
+			return
+
+		await boss.get_tree().physics_frame
+		elapsed += 1.0 / float(
+			Engine.physics_ticks_per_second
+		)
+
+	_deactivate_hitbox()
 
 	if not _is_sequence_valid(current_sequence):
-		return
-
-	_set_hitbox_active(false)
-	is_charge_running = false
-
-	if not finished:
-		boss.stop_horizontal_movement()
-		_finish_current_attack()
 		return
 
 	# Phase 3: Slide.
+	is_charge_running = false
 	is_sliding = true
 
-	finished = await _play_and_wait(SLIDE_ANIMATION)
+	boss.play_boss_animation(SLIDE_ANIMATION)
 
-	if not _is_sequence_valid(current_sequence):
-		return
+	# Tunggu sampai momentum charge habis.
+	while true:
+		if not _is_sequence_valid(current_sequence):
+			return
+
+		var horizontal_speed := Vector2(
+			boss.velocity.x,
+			boss.velocity.z
+		).length()
+
+		if horizontal_speed <= SLIDE_MIN_SPEED:
+			break
+
+		await boss.get_tree().physics_frame
 
 	is_sliding = false
-	boss.stop_horizontal_movement()
+	_stop_attack_movement()
 
 	_finish_current_attack()
 
+
+# ==================================================
+# NORMAL ATTACK
+# ==================================================
 
 func _execute_normal_attack(
 	current_sequence: int,
 	attack: AttackData
 ) -> void:
-	_set_hitbox_active(false)
+	_deactivate_hitbox()
+	_stop_attack_movement()
 
 	var finished := await _play_and_wait(attack.animation_name)
 
 	if not _is_sequence_valid(current_sequence):
 		return
 
-	_set_hitbox_active(false)
+	_deactivate_hitbox()
 
 	if not finished:
 		push_warning(
@@ -184,11 +284,18 @@ func _execute_normal_attack(
 	_finish_current_attack()
 
 
+# ==================================================
+# CHARGE UTILITIES
+# ==================================================
+
 func _get_charge_direction() -> Vector3:
 	if boss.target == null or not is_instance_valid(boss.target):
 		return Vector3.RIGHT
 
-	var direction := boss.target.global_position - boss.global_position
+	var direction: Vector3 = (
+		boss.target.global_position - boss.global_position
+	)
+
 	direction.y = 0.0
 
 	if direction.length_squared() < 0.001:
@@ -196,6 +303,20 @@ func _get_charge_direction() -> Vector3:
 
 	return direction.normalized()
 
+
+func _get_charge_distance() -> float:
+	var offset: Vector3 = (
+		boss.global_position - charge_start_position
+	)
+
+	offset.y = 0.0
+
+	return offset.length()
+
+
+# ==================================================
+# ANIMATION
+# ==================================================
 
 func _play_and_wait(animation_name: StringName) -> bool:
 	if not is_instance_valid(boss):
@@ -208,6 +329,7 @@ func _play_and_wait(animation_name: StringName) -> bool:
 		return false
 
 	boss.boss_sprite.play(animation_name)
+
 	await boss.boss_sprite.animation_finished
 
 	return is_instance_valid(boss)
@@ -223,27 +345,53 @@ func _on_frame_changed() -> void:
 	if boss.boss_sprite.animation != current_attack.animation_name:
 		return
 
-	var frame := boss.boss_sprite.frame
+	var frame: int = boss.boss_sprite.frame
 
-	var should_be_active := (
+	var should_be_active: bool = (
 		frame >= current_attack.active_start_frame
 		and frame <= current_attack.active_end_frame
 	)
 
-	_set_hitbox_active(should_be_active)
+	if should_be_active:
+		_activate_hitbox(current_attack)
+	else:
+		_deactivate_hitbox()
 
 
-func _set_hitbox_active(active: bool) -> void:
-	if hitbox_active == active:
+# ==================================================
+# HITBOX
+# ==================================================
+
+func _activate_hitbox(attack: AttackData) -> void:
+	var requested_hitbox: BossAttackHitbox = (
+		boss.get_attack_hitbox(attack.hitbox_name)
+	)
+
+	if requested_hitbox == null:
 		return
 
-	hitbox_active = active
+	if active_hitbox == requested_hitbox:
+		return
 
-	if active:
-		boss.attack_hitbox.activate(current_attack)
-	else:
-		boss.attack_hitbox.deactivate()
+	_deactivate_hitbox()
 
+	active_hitbox = requested_hitbox
+	active_hitbox.activate(attack)
+
+
+func _deactivate_hitbox() -> void:
+	if active_hitbox == null:
+		return
+
+	if is_instance_valid(active_hitbox):
+		active_hitbox.deactivate()
+
+	active_hitbox = null
+
+
+# ==================================================
+# ATTACK CONTROL
+# ==================================================
 
 func _is_sequence_valid(expected_sequence: int) -> bool:
 	return (
@@ -255,19 +403,27 @@ func _is_sequence_valid(expected_sequence: int) -> bool:
 
 
 func _finish_current_attack() -> void:
-	_set_hitbox_active(false)
+	_deactivate_hitbox()
 
 	is_charge_running = false
 	is_sliding = false
+
+	# Cooldown dimulai setelah seluruh serangan selesai.
+	if current_attack != null:
+		attack_cooldown_timer = current_attack.cooldown
+
+	print(
+		"[Boss] Attack finished. Cooldown: ",
+		attack_cooldown_timer
+	)
 
 	finish_attack()
 
 
 func stop() -> void:
-	# Invalidasi proses async yang masih menunggu animasi.
 	sequence_id += 1
 
-	_set_hitbox_active(false)
+	_deactivate_hitbox()
 
 	is_charge_running = false
 	is_sliding = false

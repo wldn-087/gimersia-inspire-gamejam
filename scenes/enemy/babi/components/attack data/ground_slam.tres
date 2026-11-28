@@ -11,4 +11,5 @@ active_end_frame = 19
 recovery_frame = 19
 damage = 30.0
 cooldown = 6.0
+hitbox_name = &"GroundSlamHitbox"
 metadata/_custom_type_script = "uid://d13gweb1qy83u"

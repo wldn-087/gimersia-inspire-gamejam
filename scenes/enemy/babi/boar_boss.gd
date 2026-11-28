@@ -6,16 +6,27 @@ class_name BoarBoss
 @export var attacks: Array[AttackData] = []
 
 @onready var boss_sprite: AnimatedSprite3D = $Visual/AnimatedSprite3D
-@onready var attack_hitbox: BossAttackHitbox = $AttackHitbox
+
+@onready var charge_hitbox: BossAttackHitbox = $AttackHitBoxes/ChargeHitbox
+@onready var tusk_hitbox: BossAttackHitbox = $AttackHitBoxes/TuskHitbox
+@onready var ground_slam_hitbox: BossAttackHitbox = $AttackHitBoxes/GroundSlamHitBox
 
 var boss_ai: BossAI
 var boss_locomotion: BossLocomotion
 var boss_combat: BossCombat
 
+var tusk_base_x: float
+var ground_slam_base_x: float
+
 
 func _on_ready() -> void:
+	max_health = 750.0
 	reset_health()
+
 	target = null
+
+	tusk_base_x = absf(tusk_hitbox.hitbox_shape.position.x)
+	ground_slam_base_x = absf(ground_slam_hitbox.hitbox_shape.position.x)
 
 	boss_locomotion = BossLocomotion.new(self)
 
@@ -56,6 +67,26 @@ func play_boss_animation(animation_name: StringName) -> void:
 
 	if boss_sprite.animation != animation_name:
 		boss_sprite.play(animation_name)
+
+
+func get_attack_hitbox(hitbox_name: StringName) -> BossAttackHitbox:
+	match hitbox_name:
+		&"ChargeHitbox":
+			return charge_hitbox
+		&"TuskHitbox":
+			return tusk_hitbox
+		&"GroundSlamHitbox":
+			return ground_slam_hitbox
+
+	push_warning("[Boss] Unknown hitbox: " + str(hitbox_name))
+	return null
+
+
+func _on_facing_changed(left: bool) -> void:
+	var direction := -1.0 if left else 1.0
+
+	tusk_hitbox.hitbox_shape.position.x = tusk_base_x * direction
+	ground_slam_hitbox.hitbox_shape.position.x = ground_slam_base_x * direction
 
 
 func _on_death() -> void:

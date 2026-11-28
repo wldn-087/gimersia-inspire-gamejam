@@ -48,15 +48,17 @@ func apply_damage(target: Node) -> void:
 	if not is_instance_valid(target):
 		return
 
-	if target == get_parent():
-		return
-
 	var target_id := target.get_instance_id()
 
 	if hit_targets.has(target_id):
 		return
 
-	var health: HealthComponent = target.get("health_component")
+	var health: HealthComponent = null
+
+	if target is Player:
+		health = target.health_component
+	elif target is Lahan:
+		health = target.health_component
 
 	if health == null:
 		return

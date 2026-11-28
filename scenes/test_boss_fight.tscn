@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b2tjbj1k54e" path="res://assets/model-3d/ground_back.glb" id="6_p6r05"]
 [ext_resource type="PackedScene" uid="uid://bv83lt880w4ui" path="res://scenes/enemy/babi/boar.tscn" id="7_cr21g"]
 [ext_resource type="PackedScene" uid="uid://dr831lsjk88ta" path="res://scenes/player/player.tscn" id="8_nniyg"]
+[ext_resource type="PackedScene" uid="uid://b2p8315iwxcow" path="res://scenes/lahan.tscn" id="9_nniyg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw8ke"]
 albedo_texture = ExtResource("1_vuxie")
@@ -1071,3 +1072,9 @@ environment = SubResource("Environment_nniyg")
 transform = Transform3D(-0.8920127, -0.09156408, 0.44263935, 0.42327762, -0.5127828, 0.74692065, 0.15858674, 0.8536218, 0.49616572, 0, 6.0864086, -0.8943491)
 light_color = Color(0.95105034, 0.9216165, 0.82684344, 1)
 shadow_enabled = true
+
+[node name="Lahan" parent="." unique_id=1746492850 instance=ExtResource("9_nniyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -7)
+
+[node name="Lahan2" parent="." unique_id=337292389 instance=ExtResource("9_nniyg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.87001514, 0, -12.661766)
